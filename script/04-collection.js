@@ -23,6 +23,7 @@ function renderCollection() {
     card.dataset.id = link.id;
     card.classList.toggle("is-pinned", Boolean(link.pinned));
     mainLink.href = normalizeUrl(link.url);
+    mainLink.target = typeof getHomepageNavigationTarget === "function" && getHomepageNavigationTarget() !== window ? "_parent" : "_self";
     mainLink.title = link.name;
     mainLink.innerHTML = `
       <span class="shortcut-icon" aria-hidden="true">
@@ -31,7 +32,7 @@ function renderCollection() {
       </span>
       <div class="shortcut-text">
         <span class="shortcut-title">${escapeHtml(link.name)}</span>
-        <span class="shortcut-url">${escapeHtml(stripProtocol(link.url))}</span>
+        <span class="shortcut-url" title="${escapeAttribute(link.url)}">${escapeHtml(stripProtocol(link.url))}</span>
       </div>
     `;
 

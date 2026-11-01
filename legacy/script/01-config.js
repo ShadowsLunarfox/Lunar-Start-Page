@@ -46,7 +46,7 @@ const DEFAULT_SEARCH_SUGGESTIONS = [
 ];
 
 const SEARCH_ENGINES = {
-  google: { url: "https://www.google.com/search?q=%s", label: "Google", color: "#4285f4", icon: "../resource/icons/logo/google.ico", category: "mainstream" },
+  google: { url: "https://www.google.com/search?q=%s", label: "Google", color: "#4285f4", icon: "../resource/icons/google-apps/search.svg", category: "mainstream" },
   duckduckgo: { url: "https://duckduckgo.com/?q=%s", label: "DuckDuckGo", color: "#de5833", icon: "../resource/icons/logo/duckduckgo.ico", category: "mainstream" },
   bing: { url: "https://www.bing.com/search?q=%s", label: "Bing", color: "#008373", icon: "../resource/icons/logo/bing.ico", category: "mainstream" },
   brave: { url: "https://search.brave.com/search?q=%s", label: "Brave", color: "#fb542b", icon: "../resource/icons/logo/brave.ico", category: "niche" },
@@ -161,6 +161,7 @@ const DEFAULT_SETTINGS = {
   dropdownColor: "#26304a",
   sliderTrackColor: "#33405e",
   sliderFillColor: "#7dc4ff",
+  font: { type: "system", family: "", id: "", name: "" },
   fontScale: 100,
   radius: 20,
   panelBlur: 22,

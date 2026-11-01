@@ -380,5 +380,51 @@
     "open": "瀏覽器主題顏色",
     "unavailable": "請喺 Chrome 或 Edge 打開已安裝嘅擴充功能，再調整瀏覽器配色。",
     "failed": "打唔開瀏覽器主題設定，請再試。"
-  }
+  },
+  "fonts": {
+    "title": "自訂字體",
+    "desc": "揀已安裝嘅字體名稱或者匯入字體檔案，新舊版共用呢個設定。",
+    "family": "已安裝嘅字體名稱",
+    "placeholder": "例如：微軟正黑體、Segoe UI",
+    "apply": "套用字體",
+    "import": "匯入字體檔案",
+    "reset": "還原預設字體",
+    "hint": "支援 TTF、OTF、WOFF 同 WOFF2，最大 20 MB。檔案只會儲存喺本機，亦會包含喺備份入面。缺少嘅字體或字元會用系統後備字體。",
+    "preview": "自訂你嘅主頁，令每個新分頁更合心意。The quick brown fox. 0123456789",
+    "default_active": "而家用緊預設字體。",
+    "system_active": "已揀系統字體：{name}。",
+    "file_active": "已匯入字體：{name}。",
+    "loading": "驗證同儲存字體中…",
+    "unavailable": "載入唔到已儲存嘅字體，已改用預設字體。請重新匯入檔案。",
+    "too_large": "請揀唔超過 20 MB 嘅非空字體檔案。",
+    "invalid": "載入唔到呢個字體，請揀有效嘅 TTF、OTF、WOFF 或 WOFF2 檔案。",
+    "save_failed": "儲存唔到字體喺本機，原本嘅字體冇改動。"
+  },
+  "google_apps": {
+    "title": "Google 應用程式",
+    "close": "關閉",
+    "all_products": "更多 Google 產品",
+    "services": {
+      "search": "搜尋",
+      "maps": "地圖",
+      "youtube": "YouTube",
+      "play": "Play",
+      "news": "新聞",
+      "gmail": "Gmail",
+      "meet": "Meet",
+      "chat": "Chat",
+      "drive": "雲端硬碟",
+      "business": "商家檔案",
+      "gemini": "Gemini",
+      "calendar": "日曆",
+      "photos": "相簿",
+      "translate": "翻譯",
+      "docs": "文件",
+      "sheets": "試算表",
+      "slides": "簡報",
+      "contacts": "聯絡人",
+      "keep": "Keep"
+    }
+  },
+  "connector": {}
 }

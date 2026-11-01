@@ -14,13 +14,11 @@ The signed extension store package and the native companion are distinct install
 
 ## Single purpose and listing copy
 
-Primary purpose: a customizable new tab page with search, saved shortcuts, wallpaper, clock/layout controls and optional integrated Windows media and system-usage widgets.
+Primary purpose: a customizable new tab page with search, saved shortcuts, wallpaper, clock/layout controls and an optional integrated Windows media widget.
 
 Suggested disclosure for the description:
 
 > Optional Windows media widget: display and control the media selected by Windows. Requires Windows 10 version 1809 or later and a separate Lunar Start media connector. It starts disabled and asks for permission after its disclosure. Select background updates to keep following Windows while homepages are closed; uncheck it for visible-widget-only access. Only the latest state is cached in browser-session memory, without playback history, backups or upload. Disable and revoke permission stops access and clears the cache.
-
-> Optional system monitor (modern mode): display whole-computer CPU usage and physical memory used/total. It requests CPU/memory permissions only after you enable it and needs no companion program. Select background updates for continued shared sampling while homepages are closed; uncheck it to sample only for visible widgets. Only the latest reading is cached in browser-session memory. No history, backups or upload. Disable it to revoke its separate permissions and clear the cache without affecting media access.
 
 Do not describe this as Google/Microsoft-endorsed, universally controlling every application, or working without the separate connector. The widget's position, visibility and consent belong only to the modern interface. Features common to modern and legacy retain their existing sharing rules.
 
@@ -31,8 +29,7 @@ Do not describe this as Google/Microsoft-endorsed, universally controlling every
 | `storage` | Local settings, wallpaper fallback data and durable right-click save queues. No Chrome Storage Sync. |
 | `contextMenus` | Explicit “Save This Page to Lunar Start” context-menu action. |
 | `activeTab` | Temporary title/address access only when that context menu is invoked; replaces broad `tabs` access. No browsing-history scan or background tab monitoring. |
-| optional `nativeMessaging` | User-enabled Windows media widget talks to the separately installed local connector. Denial leaves core functions working; removal stops active connections. |
-| optional `system.cpu`, `system.memory` | Explicitly enabled shared CPU/memory sampler. Background access is a separate checkbox; unchecking it limits sampling to visible widgets. No native connector, process list or memory-content access. The latest cache remains in browser-session memory; disabling revokes only these permissions and clears the cache. |
+| optional `nativeMessaging` | The optional Windows media widget uses the local Windows connector after its disclosure and explicit opt-in. Denial leaves core homepage functions working; revocation stops media access and clears temporary media data. |
 | `alarms` | Recover explicitly enabled background sampling after a worker restart. An alarm exists only for a feature with background updates selected; it is not used for unrelated activity. |
 | exact suggestion-provider host origins | HTTPS query suggestions from the implemented DuckDuckGo, Google, Bing, Yahoo, Baidu, Sogou and 360 endpoints. No unused suggestion host permission. |
 

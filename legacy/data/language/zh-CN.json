@@ -538,5 +538,51 @@
     "open": "浏览器主题颜色",
     "unavailable": "请在 Chrome 或 Edge 中打开已安装的扩展来调整浏览器配色。",
     "failed": "无法打开浏览器主题设置，请重试。"
-  }
+  },
+  "fonts": {
+    "title": "自定义字体",
+    "desc": "选择已安装的字体名称或导入字体文件，新旧版共用此设置。",
+    "family": "已安装的字体名称",
+    "placeholder": "例如：微软雅黑、Segoe UI",
+    "apply": "应用字体",
+    "import": "导入字体文件",
+    "reset": "恢复默认字体",
+    "hint": "支持 TTF、OTF、WOFF 和 WOFF2，最大 20 MB。文件仅保存在本机，并包含在备份中。缺少的字体或字符会使用系统后备字体。",
+    "preview": "自定义你的主页，让每个新标签页更合心意。The quick brown fox. 0123456789",
+    "default_active": "正在使用默认字体。",
+    "system_active": "已选择系统字体：{name}。",
+    "file_active": "已导入字体：{name}。",
+    "loading": "正在验证并保存字体…",
+    "unavailable": "无法加载已保存的字体，已使用默认字体。请重新导入文件以恢复。",
+    "too_large": "请选择不超过 20 MB 的非空字体文件。",
+    "invalid": "无法加载此字体，请选择有效的 TTF、OTF、WOFF 或 WOFF2 文件。",
+    "save_failed": "无法将字体保存到本机，原来的字体未更改。"
+  },
+  "google_apps": {
+    "title": "Google 应用",
+    "close": "关闭",
+    "all_products": "更多 Google 产品",
+    "services": {
+      "search": "搜索",
+      "maps": "地图",
+      "youtube": "YouTube",
+      "play": "Play",
+      "news": "新闻",
+      "gmail": "Gmail",
+      "meet": "Meet",
+      "chat": "Chat",
+      "drive": "云端硬盘",
+      "business": "商家资料",
+      "gemini": "Gemini",
+      "calendar": "日历",
+      "photos": "相册",
+      "translate": "翻译",
+      "docs": "文档",
+      "sheets": "表格",
+      "slides": "幻灯片",
+      "contacts": "通讯录",
+      "keep": "Keep"
+    }
+  },
+  "connector": {}
 }

@@ -380,5 +380,51 @@
     "open": "ブラウザーのテーマカラー",
     "unavailable": "ブラウザーの配色を変更するには、Chrome または Edge でインストール済みの拡張機能を開いてください。",
     "failed": "ブラウザーのテーマ設定を開けません。再試行してください。"
-  }
+  },
+  "fonts": {
+    "title": "カスタムフォント",
+    "desc": "インストール済みのフォント名を指定するか、フォントファイルを読み込みます。新旧の画面で同じ設定を使用します。",
+    "family": "インストール済みフォント名",
+    "placeholder": "例：Yu Gothic、Segoe UI",
+    "apply": "フォントを適用",
+    "import": "フォントを読み込む",
+    "reset": "既定のフォントに戻す",
+    "hint": "TTF、OTF、WOFF、WOFF2 に対応（最大 20 MB）。ファイルはこの端末にのみ保存され、バックアップに含まれます。見つからないフォントや文字にはシステムの代替フォントを使います。",
+    "preview": "ホームページを自分らしく。The quick brown fox. 0123456789",
+    "default_active": "既定のフォントを使用中です。",
+    "system_active": "選択したフォント：{name}。",
+    "file_active": "読み込んだフォント：{name}。",
+    "loading": "フォントを検証して保存しています…",
+    "unavailable": "保存したフォントを読み込めないため、既定のフォントを使用しています。ファイルをもう一度読み込んでください。",
+    "too_large": "空でない、20 MB 以下のフォントファイルを選んでください。",
+    "invalid": "このフォントを読み込めません。有効な TTF、OTF、WOFF、WOFF2 ファイルを選んでください。",
+    "save_failed": "フォントをこの端末に保存できませんでした。以前のフォントは変更されていません。"
+  },
+  "google_apps": {
+    "title": "Google アプリ",
+    "close": "閉じる",
+    "all_products": "Google のその他のサービス",
+    "services": {
+      "search": "検索",
+      "maps": "マップ",
+      "youtube": "YouTube",
+      "play": "Play",
+      "news": "ニュース",
+      "gmail": "Gmail",
+      "meet": "Meet",
+      "chat": "Chat",
+      "drive": "ドライブ",
+      "business": "ビジネス プロフィール",
+      "gemini": "Gemini",
+      "calendar": "カレンダー",
+      "photos": "フォト",
+      "translate": "翻訳",
+      "docs": "ドキュメント",
+      "sheets": "スプレッドシート",
+      "slides": "スライド",
+      "contacts": "連絡先",
+      "keep": "Keep"
+    }
+  },
+  "connector": {}
 }

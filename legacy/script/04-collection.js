@@ -21,6 +21,7 @@ function renderCollection() {
     card.dataset.id = link.id;
     card.classList.toggle("is-pinned", Boolean(link.pinned));
     mainLink.href = normalizeUrl(link.url);
+    mainLink.target = typeof getHomepageNavigationTarget === "function" && getHomepageNavigationTarget() !== window ? "_parent" : "_self";
     mainLink.innerHTML = `
       <span class="shortcut-icon" aria-hidden="true">
         <img src="${escapeAttribute(link.icon || faviconForUrl(link.url))}" alt="">

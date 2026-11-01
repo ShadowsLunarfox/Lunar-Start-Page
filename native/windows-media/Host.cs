@@ -30,8 +30,7 @@ internal static class Program
         {
             if (args.Length == 1 && args[0] == "--probe")
             {
-                Console.OutputEncoding = new UTF8Encoding(false);
-                Console.WriteLine(Json.Serialize(Snapshot()));
+                WriteProbe(Snapshot());
                 return 0;
             }
             Run();
@@ -41,6 +40,16 @@ internal static class Program
         {
             Console.Error.WriteLine(error.GetType().Name + ": " + error.Message);
             return 1;
+        }
+    }
+
+    private static void WriteProbe(object value)
+    {
+        using (var output = Console.OpenStandardOutput())
+        {
+            var bytes = Encoding.UTF8.GetBytes(Json.Serialize(value) + Environment.NewLine);
+            output.Write(bytes, 0, bytes.Length);
+            output.Flush();
         }
     }
 
@@ -115,8 +124,8 @@ internal static class Program
     {
         if (Manager == null) {
             Manager = Complete(GlobalSystemMediaTransportControlsSessionManager.RequestAsync());
-            Manager.CurrentSessionChanged += (sender, args) => { CurrentDirty = true; };
-            Manager.SessionsChanged += (sender, args) => { CurrentDirty = true; };
+            Manager.CurrentSessionChanged += MarkCurrentDirty;
+            Manager.SessionsChanged += MarkSessionsDirty;
         }
         if (CurrentDirty) {
             CurrentDirty = false;
@@ -128,6 +137,8 @@ internal static class Program
         return CurrentSession;
     }
 
+    private static void MarkCurrentDirty(GlobalSystemMediaTransportControlsSessionManager sender, CurrentSessionChangedEventArgs args) { CurrentDirty = true; }
+    private static void MarkSessionsDirty(GlobalSystemMediaTransportControlsSessionManager sender, SessionsChangedEventArgs args) { CurrentDirty = true; }
     private static void Command(string command, string sessionId, Dictionary<string, object> request)
     {
         if (!new[] { "play", "pause", "toggle", "seekTo", "seekBy", "next", "previous" }.Contains(command)) throw new CommandError("unsupported_command");
@@ -222,3 +233,5 @@ internal static class Program
     private static double Number(Dictionary<string, object> request, string key) { object value; double number; if (!request.TryGetValue(key, out value) || !double.TryParse(Convert.ToString(value, CultureInfo.InvariantCulture), NumberStyles.Float, CultureInfo.InvariantCulture, out number) || double.IsNaN(number) || double.IsInfinity(number) || Math.Abs(number) > 86400000) throw new CommandError("invalid_position"); return number; }
     private sealed class CommandError : Exception { public readonly string Code; public CommandError(string code) { Code = code; } }
 }
+
+// DXGI supplies adapter names/capacities; Windows PDH supplies aggregate usage.

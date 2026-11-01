@@ -1,4 +1,4 @@
-﻿// Live clock rendering.
+// Live clock rendering.
 const BACKGROUND_VIDEO_HAVE_METADATA = 1;
 const BACKGROUND_VIDEO_HAVE_CURRENT_DATA = 2;
 const BACKGROUND_VIDEO_RECOVERY_DELAY_MS = 520;
@@ -110,6 +110,7 @@ function renderLayoutSwitch() {
 
 // Mirror settings values back into the settings UI controls.
 function renderSettingsPanel() {
+  globalThis.lunarFonts?.localize();
   const resolvedTextColor = resolveThemeTextColor(state.settings.textColor, state.settings.theme);
   languageSelectEl.value = currentLanguage;
   themeModeEl.value = state.settings.theme;
@@ -1249,6 +1250,7 @@ function clearBackgroundLayerImage() {
 
 // Apply current theme colors plus fine-grained visual customization variables.
 function applyThemeSettings() {
+  void globalThis.lunarFonts?.apply(state.settings.font);
   const theme = state.settings.theme;
   document.body.dataset.theme = theme;
 

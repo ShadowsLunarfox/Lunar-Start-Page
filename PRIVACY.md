@@ -16,8 +16,6 @@ The extension stores saved/imported shortcut names and URLs, icon information, o
 
 Modern/legacy synchronization takes place within the same browser profile, not through a developer cloud. The extension does not upload these records through Chrome Storage Sync. Diagnostics are generated locally; their contents leave that local interface only if you choose to copy, export or submit them.
 
-The optional modern system monitor requests system.cpu and system.memory browser permissions only after you enable it. A shared sampler reads whole-device CPU counters and total/available physical memory about every two seconds. With background updates selected, this continues while the browser is running even when widgets are hidden or all homepages are closed. Without background updates, sampling runs only for visible homepage widgets. Only the latest reading is cached in browser-session memory for immediate display when reopening; there is no history, backup inclusion or upload. It does not read process lists or memory contents and needs no native connector. Disable or permission revocation stops sampling and clears the cache. Enable/background/visibility choices and layout are saved locally; closing the browser clears the session cache.
-
 ## 3. Search and third-party requests
 
 - A submitted search sends the query to the selected provider. Online suggestions send typed text to the relevant configured suggestion providers and, when necessary, fallback providers. Multi-engine mode may contact several providers. You can turn suggestions off.

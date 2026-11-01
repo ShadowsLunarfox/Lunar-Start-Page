@@ -1,0 +1,12 @@
+/* Explicit font choices override display fonts supplied by legacy themes. */
+html[data-custom-font] body,
+html[data-custom-font] :is(button, input, select, textarea, h1, h2, h3, h4, h5, h6, .clock, .clock-badge, .search-label, .bookmark-search-label, .empty-state-title) {
+  font-family: var(--custom-font-family) !important;
+}
+.custom-font-controls { display: grid; gap: 12px; min-width: 0; }
+.custom-font-controls label { display: grid; gap: 8px; }
+.custom-font-controls input[type="text"] { min-width: 0; width: 100%; }
+.custom-font-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.custom-font-actions button { flex: 1 1 auto; }
+.custom-font-note { margin: 0; color: var(--text-soft); font-size: var(--font-xs); line-height: 1.65; overflow-wrap: anywhere; }
+.custom-font-preview { margin: 0; padding: 14px; border: 1px solid var(--panel-border); border-radius: var(--ui-radius-md); background: var(--secondary); color: var(--text-main); font-size: calc(16px * var(--font-scale)); line-height: 1.7; overflow-wrap: anywhere; }

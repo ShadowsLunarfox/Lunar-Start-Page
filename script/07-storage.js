@@ -108,6 +108,7 @@ async function clearCustomBackground() {
 
 // Reset appearance-only settings without touching layout or positions.
 function resetAppearanceSettings() {
+  const previousFont = state.settings.font;
   state.settings = sanitizeSettings({
     ...state.settings,
     theme: DEFAULT_SETTINGS.theme,
@@ -117,6 +118,7 @@ function resetAppearanceSettings() {
     dropdownColor: DEFAULT_SETTINGS.dropdownColor,
     sliderTrackColor: DEFAULT_SETTINGS.sliderTrackColor,
     sliderFillColor: DEFAULT_SETTINGS.sliderFillColor,
+    font: structuredClone(DEFAULT_SETTINGS.font),
     fontScale: DEFAULT_SETTINGS.fontScale,
     radius: DEFAULT_SETTINGS.radius,
     panelBlur: DEFAULT_SETTINGS.panelBlur,
@@ -124,7 +126,7 @@ function resetAppearanceSettings() {
     clockStyle: DEFAULT_SETTINGS.clockStyle,
     panelOpacity: DEFAULT_SETTINGS.panelOpacity
   });
-  persistAndRender();
+  if (persistAndRender()) void globalThis.lunarFonts?.forgetPrevious(previousFont);
 }
 
 function clearDebugLocalStorage() {
@@ -197,6 +199,7 @@ function renderAfterSettingChange(key) {
 
 function shouldNormalizePanelsAfterSettingChange(key) {
   return [
+    "font",
     "fontScale",
     "radius",
     "panelBlur",
@@ -236,14 +239,17 @@ function importStateFile(event) {
   reader.onload = async () => {
     try {
       const parsed = JSON.parse(String(reader.result));
-      const importedState = sanitizeState(parsed.state || parsed);
+      const raw = parsed.state || parsed;
+      const importedState = sanitizeState(raw);
+      const previousFont = state.settings.font;
+      if (globalThis.lunarFonts) importedState.settings.font = await globalThis.lunarFonts.restoreAsset(importedState.settings.font, raw.fontAsset);
       await normalizeBackgroundStorage(importedState);
       if (importedState.background.type !== "image") {
         await clearStoredBackgroundImage();
       }
       state = importedState;
       bookmarkFilter = "";
-      persistAndRender(true);
+      if (persistAndRender(true)) void globalThis.lunarFonts?.forgetPrevious(previousFont);
     } catch {
       showInlineNotice(t("alerts.import_failed"), "error");
     } finally {
@@ -342,6 +348,7 @@ function sanitizeSettings(value) {
     shortcutsVisible: typeof value?.shortcutsVisible === "boolean"
       ? value.shortcutsVisible
       : (typeof value?.uiVisible === "boolean" ? value.uiVisible : DEFAULT_SETTINGS.shortcutsVisible),
+    font: globalThis.lunarFonts?.sanitize(value?.font) || structuredClone(DEFAULT_SETTINGS.font),
     fontScale: clampNumber(value?.fontScale, 90, 120, DEFAULT_SETTINGS.fontScale),
     radius: clampNumber(value?.radius, 8, 32, DEFAULT_SETTINGS.radius),
     panelBlur: clampNumber(value?.panelBlur, 0, 30, DEFAULT_SETTINGS.panelBlur),
@@ -387,8 +394,7 @@ function sanitizePanelPositions(value) {
     clock: sanitizePanelPositionItem(value?.clock, defaults.clock),
     search: sanitizePanelPositionItem(value?.search, defaults.search),
     collection: sanitizePanelPositionItem(value?.collection, defaults.collection),
-    player: sanitizePanelPositionItem(value?.player, defaults.player),
-    monitor: sanitizePanelPositionItem(value?.monitor, defaults.monitor)
+    player: sanitizePanelPositionItem(value?.player, defaults.player)
   };
 }
 
@@ -412,8 +418,7 @@ function sanitizePanelScales(value, legacyClockScale) {
     clock: sanitizePanelScaleItem(value?.clock, migratedClockScale),
     search: sanitizePanelScaleItem(value?.search, defaults.search),
     collection: sanitizePanelScaleItem(value?.collection, defaults.collection),
-    player: sanitizePanelScaleItem(value?.player, defaults.player),
-    monitor: sanitizePanelScaleItem(value?.monitor, defaults.monitor)
+    player: sanitizePanelScaleItem(value?.player, defaults.player)
   };
 }
 
@@ -547,6 +552,9 @@ async function createExportableState() {
   const exportableState = structuredClone(state);
   if (exportableState.background.type === "image" && exportableState.background.value === CHROME_BACKGROUND_VALUE) {
     exportableState.background.value = await getStoredBackgroundImageForExport();
+  }
+  if (exportableState.settings.font.type === "file" && globalThis.lunarFonts) {
+    exportableState.fontAsset = await globalThis.lunarFonts.exportAsset(exportableState.settings.font);
   }
   return exportableState;
 }

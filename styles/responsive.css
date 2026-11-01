@@ -27,12 +27,8 @@
   .collection-add { width: 34px; padding: 8px; justify-content: center; }
   .collection-add span { display: none; }
   .collection-grid:not(.list-mode) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--card-gap); }
-  .shortcut-card { padding: 10px 9px 6px; }
-  .shortcut-title { font-size: var(--font-md); }
-  .shortcut-url { font-size: var(--font-xs); }
-  .shortcut-main { gap: 7px; }
-  .shortcut-icon { width: 28px; height: 28px; border-radius: 8px; }
-  .shortcut-icon img { width: 17px; height: 17px; }
+  .shortcut-card { padding: 8px 9px; }
+  .shortcut-main { column-gap: 8px; }
   .shortcut-actions { gap: 1px; }
   .mini-button { padding: 2px 5px; font-size: var(--font-xs); }
   .panel-drag-handle { right: 0; top: -32px; }
@@ -62,7 +58,7 @@
   .debug-feature-list, .debug-page .debug-actions-grid, .debug-page .settings-grid.two-column { grid-template-columns: 1fr; }
   .debug-form > .dialog-actions { padding: 12px 18px; }
   .collection-grid.list-mode .shortcut-card { padding-left: 14px; }
-  .collection-grid.list-mode .shortcut-actions { opacity: 1; }
+  .collection-grid.list-mode .shortcut-actions { opacity: 1; pointer-events: auto; }
 }
 @media (max-width: 380px) {
   .collection-grid:not(.list-mode) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -87,6 +83,15 @@
   .dashboard { margin-top: 8px; }
   .app-footer { display: none; }
 }
-@media (hover: none) { .shortcut-actions, .pin-toggle, .drag-handle, .resize-handle { opacity: .75; } }
+@media (hover: none) {
+  .shortcut-actions, .pin-toggle, .drag-handle, .resize-handle { opacity: .75; }
+  .shortcut-actions { pointer-events: auto; }
+  .collection-grid:not(.list-mode) .shortcut-card { grid-template-rows: minmax(0, 1fr) 23px; row-gap: 2px; }
+  .collection-grid:not(.list-mode) .shortcut-main { grid-template-columns: 24px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) 24px; }
+  .collection-grid:not(.list-mode) .shortcut-title { -webkit-line-clamp: 1; max-height: 1.15em; }
+  .collection-grid:not(.list-mode) .shortcut-icon { width: 24px; height: 24px; }
+  .collection-grid:not(.list-mode) .shortcut-icon img { width: 20px; height: 20px; }
+  .collection-grid:not(.list-mode) .shortcut-actions { position: static; padding: 0; border: 0; background: transparent; color: var(--text-soft); box-shadow: none; }
+}
 /* Initial placement clears the corner buttons; dragging still uses the full viewport. */
 @media (max-width: 1240px) { .page-shell { padding-top: 64px; } }

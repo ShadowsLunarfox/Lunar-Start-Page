@@ -1,0 +1,154 @@
+[
+  {
+    "id": "gmail",
+    "file": "gmail.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/gmail_2026/v2/web/192px.svg",
+    "sourcePage": "https://workspace.google.com/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "0a242131424b796a26247a8edd41d66fa294da6d177897526a19b7e81aedfdb8"
+  },
+  {
+    "id": "meet",
+    "file": "meet.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/meet_2026/v2/web/192px.svg",
+    "sourcePage": "https://workspace.google.com/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "ae2e86aa009fd7e1952082bff7d4fa9eca8f45ff46d0298800d53c5d6bdcb3b4"
+  },
+  {
+    "id": "chat",
+    "file": "chat.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/chat_2026/v2/web/192px.svg",
+    "sourcePage": "https://workspace.google.com/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "6bae711bb69ac5e615007572c733e68c9d0f61a8098d5fa3f5075920df963c5b"
+  },
+  {
+    "id": "drive",
+    "file": "drive.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/drive_2026/v2/web/192px.svg",
+    "sourcePage": "https://workspace.google.com/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "60a6496d705d8bf010ce126469be89889db331622b14d8ae1645a38c2aaa23f5"
+  },
+  {
+    "id": "calendar",
+    "file": "calendar.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/calendar_2026/v2/web/192px.svg",
+    "sourcePage": "https://workspace.google.com/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "7f55cd877b2261948168db3d2e9468c0cf3f07766789489e853a0f9931dff8ea"
+  },
+  {
+    "id": "docs",
+    "file": "docs.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/docs_2026/v2/web/192px.svg",
+    "sourcePage": "https://workspace.google.com/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "ce8a250ed67fa813f00e2f2be6fcf515b284dbd0c7fa29aab254b1ba8310258c"
+  },
+  {
+    "id": "sheets",
+    "file": "sheets.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/sheets_2026q3/v1/web/192px.svg",
+    "sourcePage": "https://workspace.google.com/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "3dd989706d03cf9ed780beb45af592bb46aa777edcc18543ea0764463ec936d2"
+  },
+  {
+    "id": "slides",
+    "file": "slides.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/slides_2026/v2/web/192px.svg",
+    "sourcePage": "https://workspace.google.com/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "3ad971447ab6fc537eb8bb5eae651a0473b137ee70acbbb073a231b84235c0e6"
+  },
+  {
+    "id": "keep",
+    "file": "keep.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/keep_2026/v2/web/192px.svg",
+    "sourcePage": "https://workspace.google.com/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "e61844731d298e5acf4e10280fbc2f051ba8b8fccf2ee172ddaa32005c88e004"
+  },
+  {
+    "id": "search",
+    "file": "search.svg",
+    "url": "https://www.gstatic.com/images/branding/productlogos/googleg_gradient/v1/48px.svg",
+    "sourcePage": "https://knowledge.workspace.google.com/admin/getting-started/brand-your-internal-communications-with-google-workspace?hl=en",
+    "checkedAt": "2026-11-01",
+    "sha256": "364b7008c14cf6d76dd89c8b6b4d3a9dcc88a318e9c9222db1fb543c0f03ae99"
+  },
+  {
+    "id": "maps",
+    "file": "maps.webp",
+    "url": "https://www.gstatic.com/marketing-cms/assets/images/55/0e/c70d6751460a973c06968f0b64e0/logo-maps-2025-color-2x-web-96dp.webp",
+    "sourcePage": "https://about.google/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "8a3234a66b8c25693b32e8b663aa86749a5dd878c6bbe902785d6914bf9a1b2e"
+  },
+  {
+    "id": "photos",
+    "file": "photos.webp",
+    "url": "https://www.gstatic.com/marketing-cms/assets/images/a7/0a/1e0b030945d4a7464516e82fa508/logo-photos-2025-color-2x-web-64dp.webp",
+    "sourcePage": "https://about.google/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "1df30ca0b5f66a374d83aaa087150bed402caccafc5f59f0752842a8b618290e"
+  },
+  {
+    "id": "youtube",
+    "file": "youtube.png",
+    "url": "https://www.gstatic.com/marketing-cms/assets/images/58/3f/ac28ee8b450e9e21be9d1626708a/youtube.png",
+    "sourcePage": "https://about.google/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "8d3e841c3033e83b38e87749155ff4a18a6a56ea4c59fd3e9475c4a20848a289"
+  },
+  {
+    "id": "play",
+    "file": "play.png",
+    "url": "https://www.gstatic.com/marketing-cms/assets/images/28/fe/f27a2e8f401b92129b9b27764746/play.png",
+    "sourcePage": "https://about.google/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "1d22c4f2a57fcac0da475771b813472d1a0d6922b134373908bc00887db71014"
+  },
+  {
+    "id": "news",
+    "file": "news.png",
+    "url": "https://www.gstatic.com/marketing-cms/assets/images/ec/ca/17131dff4c4fa87ba0491b991ae3/news.png",
+    "sourcePage": "https://about.google/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "eca1b786fdd994621bce0825083194cddd4a4051ff6b9e8e4c04ac881ba15443"
+  },
+  {
+    "id": "gemini",
+    "file": "gemini.png",
+    "url": "https://www.gstatic.com/marketing-cms/assets/images/a4/97/92c1ec494d129f3fb8d7caa91584/gemini-update.png",
+    "sourcePage": "https://about.google/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "55ff4f4a4f449731d37f3071511545a678f101e560d1d65ac18372403bbc6c5a"
+  },
+  {
+    "id": "contacts",
+    "file": "contacts.png",
+    "url": "https://www.gstatic.com/marketing-cms/assets/images/ff/21/95f22bf94e35bea3ec097d3f4720/contacts.png",
+    "sourcePage": "https://about.google/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "7652c98df75b268c2608dce6a9dd825913554b6852e54b1028f6be5c62eb6fc3"
+  },
+  {
+    "id": "translate",
+    "file": "translate.png",
+    "url": "https://www.gstatic.com/marketing-cms/assets/images/98/9d/0deda77e493ba72a8a1d0c7b7ead/translate.png",
+    "sourcePage": "https://about.google/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "b6ef6633195ec9b2bc7da74e59d833d4c246d6b4f7c397510cb4a474d8753a18"
+  },
+  {
+    "id": "business",
+    "file": "business.png",
+    "url": "https://www.gstatic.com/marketing-cms/assets/images/49/06/e6b298d84423b883a499fc4aa0ce/business.png",
+    "sourcePage": "https://about.google/products/",
+    "checkedAt": "2026-11-01",
+    "sha256": "a0bb541b733b634b87b6c0797d7809651c667aa46c02e549dae1ef4035af8a3c"
+  }
+]

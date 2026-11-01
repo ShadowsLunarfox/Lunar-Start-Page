@@ -538,5 +538,51 @@
     "open": "Browser theme colors",
     "unavailable": "Open the installed extension in Chrome or Edge to change browser colors.",
     "failed": "Could not open browser theme settings. Please try again."
-  }
+  },
+  "fonts": {
+    "title": "Custom font",
+    "desc": "Choose an installed font or import a font file. Both interfaces use the same choice.",
+    "family": "Installed font name",
+    "placeholder": "e.g. Segoe UI or Microsoft YaHei",
+    "apply": "Apply font",
+    "import": "Import font file",
+    "reset": "Use default font",
+    "hint": "TTF, OTF, WOFF or WOFF2, up to 20 MB. Files stay on this device and are included in backups. Missing fonts or characters use a system fallback.",
+    "preview": "The quick brown fox jumps over the lazy dog. 0123456789",
+    "default_active": "Using the default font.",
+    "system_active": "Selected installed font: {name}.",
+    "file_active": "Imported font: {name}.",
+    "loading": "Validating and saving the font…",
+    "unavailable": "The saved font could not be loaded. Using the default font; import the file again to restore it.",
+    "too_large": "Choose a non-empty font file up to 20 MB.",
+    "invalid": "This font could not be loaded. Choose a valid TTF, OTF, WOFF or WOFF2 file.",
+    "save_failed": "The font could not be saved on this device. Your previous font is unchanged."
+  },
+  "google_apps": {
+    "title": "Google apps",
+    "close": "Close",
+    "all_products": "More from Google",
+    "services": {
+      "search": "Search",
+      "maps": "Maps",
+      "youtube": "YouTube",
+      "play": "Play",
+      "news": "News",
+      "gmail": "Gmail",
+      "meet": "Meet",
+      "chat": "Chat",
+      "drive": "Drive",
+      "business": "Business Profile",
+      "gemini": "Gemini",
+      "calendar": "Calendar",
+      "photos": "Photos",
+      "translate": "Translate",
+      "docs": "Docs",
+      "sheets": "Sheets",
+      "slides": "Slides",
+      "contacts": "Contacts",
+      "keep": "Keep"
+    }
+  },
+  "connector": {}
 }

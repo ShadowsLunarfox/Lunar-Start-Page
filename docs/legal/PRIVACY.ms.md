@@ -16,8 +16,6 @@ Nama dan URL pintasan yang disimpan/diimport, maklumat ikon, susunan dan pin, se
 
 Penyegerakan versi baharu/lama berlaku dalam profil pelayar yang sama, bukan melalui awan pembangun. Sambungan tidak memuat naik rekod ini melalui Chrome Storage Sync. Diagnostik dijana setempat; kandungannya keluar daripada antara muka setempat itu hanya jika anda menyalin, mengeksport atau menghantarnya.
 
-Pemantau sistem pilihan moden meminta kebenaran system.cpu dan system.memory hanya selepas anda mengaktifkannya. Pensampel bersama membaca pembilang CPU seluruh peranti serta jumlah/baki memori fizikal kira-kira setiap dua saat. Jika kemas kini latar belakang dipilih, bacaan berterusan semasa pelayar berjalan walaupun widget disembunyikan atau semua halaman utama ditutup; jika tidak, bacaan hanya dibuat untuk widget yang kelihatan. Hanya bacaan terkini dicache dalam memori sesi pelayar untuk paparan segera apabila dibuka semula, tanpa sejarah, sandaran atau muat naik. Senarai proses dan kandungan memori tidak dibaca dan penyambung natif tidak diperlukan. Penyahaktifan atau pembatalan kebenaran menghentikan bacaan dan mengosongkan cache. Pilihan pengaktifan/latar belakang/keterlihatan dan susun atur disimpan setempat; menutup pelayar mengosongkan cache sesi.
-
 ## 3. Carian dan permintaan pihak ketiga
 
 - Menghantar carian menghantar pertanyaan kepada penyedia dipilih. Cadangan dalam talian menghantar teks ditaip kepada penyedia cadangan berkaitan yang dikonfigurasi serta penyedia gantian apabila perlu. Mod berbilang enjin boleh menghubungi beberapa penyedia. Anda boleh mematikan cadangan.

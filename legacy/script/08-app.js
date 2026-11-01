@@ -196,6 +196,8 @@ async function initialize() {
   );
 
   bindEvents();
+  globalThis.lunarFonts?.initialize();
+  globalThis.lunarGoogleApps?.initialize();
   startClock();
   bindPendingLinkSync();
   primeCachedLocalization();

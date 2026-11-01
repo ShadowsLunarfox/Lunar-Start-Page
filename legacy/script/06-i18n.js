@@ -112,6 +112,8 @@ function applyTranslations() {
   if (typeof syncCustomSelects === "function") {
     syncCustomSelects();
   }
+  globalThis.lunarFonts?.localize();
+  globalThis.lunarGoogleApps?.localize();
   syncLegalDocumentLinks();
 }
 

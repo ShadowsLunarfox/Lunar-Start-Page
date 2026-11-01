@@ -1,0 +1,25 @@
+/* Shared launcher in both interfaces; colors and fonts come from Lunar's theme. */
+.google-apps-controls { position: fixed; top: 16px; right: 16px; z-index: 80; }
+.google-apps-toggle { display: grid; place-items: center; width: 38px; height: 38px; padding: 9px; border: 1px solid var(--panel-border); border-radius: 50%; background: var(--panel); color: var(--text-main); cursor: pointer; }
+.google-apps-toggle > svg { width: 18px; height: 18px; fill: currentColor; stroke: none; }
+.google-apps-toggle:hover, .google-apps-toggle[aria-expanded="true"] { background: var(--accent-muted); border-color: var(--accent); }
+body.app-loading .google-apps-controls { opacity: 0; pointer-events: none; }
+.google-apps-panel { position: fixed; top: 64px; right: 16px; z-index: 90; display: flex; flex-direction: column; width: min(360px, calc(100vw - 24px)); max-height: calc(100dvh - 80px); padding: 8px; border: 1px solid var(--panel-border); border-radius: var(--ui-radius-xl); background: var(--panel-strong); color: var(--text-main); box-shadow: var(--shadow-lg); backdrop-filter: var(--glass-filter); }
+.google-apps-panel[hidden] { display: none; }
+.google-apps-head { display: flex; align-items: center; gap: 6px; padding: 6px 8px 12px 12px; flex-shrink: 0; }
+.google-apps-head h2 { flex: 1; min-width: 0; margin: 0; font-size: calc(17px * var(--font-scale)); line-height: 1.4; font-weight: 550; }
+.google-apps-small-button { display: grid; place-items: center; flex-shrink: 0; width: 32px; height: 32px; padding: 6px; border: 0; border-radius: 50%; background: transparent; color: var(--text-soft); cursor: pointer; }
+.google-apps-small-button:hover { background: var(--secondary); color: var(--text-main); }
+.google-apps-small-button > svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.google-apps-content { min-height: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.google-apps-grid { display: grid; list-style: none; margin: 0; padding: 8px; gap: 4px; }
+.google-apps-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.google-apps-grid > li { min-width: 0; }
+.google-apps-tile { position: relative; display: flex; align-items: center; flex-direction: column; justify-content: center; gap: 9px; min-width: 0; width: 100%; min-height: 98px; padding: 12px 5px; border: 1px solid transparent; border-radius: var(--ui-radius-md); background: transparent; color: var(--text-main); font: inherit; text-decoration: none; cursor: pointer; }
+.google-apps-tile:hover, .google-apps-tile:focus-visible { background: var(--secondary); border-color: var(--panel-border); }
+.google-apps-tile > img { width: 40px; height: 40px; object-fit: contain; }
+.google-apps-tile > span { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; font-size: calc(13px * var(--font-scale)); }
+.google-apps-footer { padding: 16px 12px 12px; text-align: center; font-size: calc(12px * var(--font-scale)); }
+.google-apps-footer > a { display: inline-block; padding: 9px 16px; border: 1px solid var(--panel-border); border-radius: 20px; background: transparent; color: var(--accent-text, var(--accent)); font: inherit; text-decoration: none; cursor: pointer; }
+.google-apps-footer > a:hover { background: var(--secondary); }
+@media (max-width: 400px) { .google-apps-panel { right: 12px; } }

@@ -12,7 +12,8 @@ const debugOnly = process.argv.includes('--debug-only');
 const versionsOnly = process.argv.includes('--versions-only');
 const playerOnly = process.argv.includes('--player-only');
 const consentOnly = process.argv.includes('--consent-only');
-const monitorOnly = process.argv.includes('--monitor-only');
+const fontsOnly = process.argv.includes('--fonts-only');
+const appsOnly = process.argv.includes('--apps-only');
 const profile = await mkdtemp(path.join(tmpdir(), 'lunar-ui-qa-'));
 const chromePath = process.env.LUNAR_CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -31,7 +32,7 @@ try {
     catch (error) { if (attempt >= 40) throw error; await delay(100); }
   }
   const query = preview ? `?debug-preview&${process.argv.find(arg => arg.startsWith('width=')) || 'width=640'}&${process.argv.find(arg => arg.startsWith('height=')) || 'height=520'}&${process.argv.find(arg => arg.startsWith('language=')) || 'language=en'}&${process.argv.find(arg => arg.startsWith('tab=')) || 'tab=overview'}&${process.argv.find(arg => arg.startsWith('theme=')) || 'theme=dark'}` : debugOnly ? '?debug-only' : '';
-  const url = monitorOnly ? `${origin}/scripts/system-monitor-check.html${preview ? '?preview' : ''}` : consentOnly ? `${origin}/scripts/consent-check.html${preview ? '?preview' : ''}` : playerOnly ? `${origin}/scripts/media-player-check.html${preview ? '?preview' : ''}` : versionsOnly ? `${origin}/scripts/version-check.html${preview ? '?preview' : ''}` : `${origin}/scripts/viewport-check.html${query}`;
+  const url = appsOnly ? `${origin}/scripts/google-apps-check.html${preview ? '?preview' : ''}` : fontsOnly ? `${origin}/scripts/font-check.html${preview ? '?preview' : ''}` : consentOnly ? `${origin}/scripts/consent-check.html${preview ? '?preview' : ''}` : playerOnly ? `${origin}/scripts/media-player-check.html${preview ? '?preview' : ''}` : versionsOnly ? `${origin}/scripts/version-check.html${preview ? '?preview' : ''}` : `${origin}/scripts/viewport-check.html${query}`;
   chrome = spawn(chromePath, ['--headless=new', '--no-first-run', '--no-default-browser-check', '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--remote-debugging-port=0', '--window-size=1440,1000', `--user-data-dir=${profile}`, 'about:blank'], { windowsHide: true, stdio: 'ignore' });
   let debugPort;
   for (let attempt = 0; ; attempt++) {
@@ -75,6 +76,11 @@ try {
   await send('Runtime.enable');
   await send('Page.enable');
   await send('Network.enable');
+  if (fontsOnly) {
+    // Use a locally installed font only in the isolated test; no font is redistributed.
+    const font = await readFile(process.env.LUNAR_TEST_FONT || 'C:\\Windows\\Fonts\\arial.ttf');
+    await send('Page.addScriptToEvaluateOnNewDocument', { source: `if(location.pathname==='/scripts/font-check.html')globalThis.__lunarFontFixture=${JSON.stringify(font.toString('base64'))};` });
+  }
   await send('Page.navigate', { url });
   const deadline = Date.now() + 60000;
   if (preview) {

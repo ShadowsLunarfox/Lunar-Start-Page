@@ -2,7 +2,7 @@
 const SHARED_SYNC_PREFIX = "lunarShared:v1:";
 const SHARED_THEME_KEYS = ["theme", "themeStyle", "accentColor", "textColor", "panelColor", "dropdownColor", "sliderTrackColor", "sliderFillColor"];
 const SHARED_TOP_KEYS = ["layout", "language", "searchEngine", "searchHistory", "background"];
-const SHARED_SETTING_KEYS = ["fontScale", "radius", "panelBlur", "panelOpacity", "searchSuggestionsEnabled", "searchSuggestionsAllEnginesEnabled", "searchSuggestionEngineKeys", "searchUiVisible", "shortcutsVisible", "clockVisible", "clockStyle", "columns", "rows", "cardGap", "cardHeight"];
+const SHARED_SETTING_KEYS = ["font", "fontScale", "radius", "panelBlur", "panelOpacity", "searchSuggestionsEnabled", "searchSuggestionsAllEnginesEnabled", "searchSuggestionEngineKeys", "searchUiVisible", "shortcutsVisible", "clockVisible", "clockStyle", "columns", "rows", "cardGap", "cardHeight"];
 const SHARED_LINK_KEYS = ["name", "url", "pinned"];
 let sharedSyncReady = false;
 let sharedSyncBaseline = null;

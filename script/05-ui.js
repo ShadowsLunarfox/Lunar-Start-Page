@@ -109,6 +109,7 @@ function renderLayoutSwitch() {
 
 // Mirror settings values back into the settings UI controls.
 function renderSettingsPanel() {
+  globalThis.lunarFonts?.localize();
   const resolvedTextColor = resolveThemeTextColor(state.settings.textColor, state.settings.theme);
   languageSelectEl.value = currentLanguage;
   themeModeEl.value = state.settings.theme;
@@ -1252,6 +1253,7 @@ function clearBackgroundLayerImage() {
 
 // Apply current theme colors plus fine-grained visual customization variables.
 function applyThemeSettings() {
+  void globalThis.lunarFonts?.apply(state.settings.font);
   const theme = state.settings.theme;
   document.body.dataset.theme = theme;
   document.documentElement.dataset.theme = theme;

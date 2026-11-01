@@ -4,6 +4,8 @@
   var stateKeys = { modern: "customHomeState", legacy: "customHomeStateLegacy" };
   if (!stateKeys[version]) return;
 
+  try { localStorage.removeItem("lunarSystemMonitor:v1"); } catch { /* Optional retired preference cleanup. */ }
+
   document.addEventListener("DOMContentLoaded", function () {
     var select = document.getElementById("interface-version");
     var status = document.getElementById("interface-version-note");

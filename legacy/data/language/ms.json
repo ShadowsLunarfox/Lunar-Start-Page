@@ -380,5 +380,51 @@
     "open": "Warna tema pelayar",
     "unavailable": "Buka sambungan yang dipasang dalam Chrome atau Edge untuk mengubah warna pelayar.",
     "failed": "Tetapan tema pelayar tidak dapat dibuka. Sila cuba lagi."
-  }
+  },
+  "fonts": {
+    "title": "Fon tersuai",
+    "desc": "Pilih nama fon yang dipasang atau import fail fon. Kedua-dua antara muka menggunakan pilihan yang sama.",
+    "family": "Nama fon yang dipasang",
+    "placeholder": "cth. Segoe UI atau Arial",
+    "apply": "Gunakan fon",
+    "import": "Import fail fon",
+    "reset": "Gunakan fon lalai",
+    "hint": "TTF, OTF, WOFF atau WOFF2, sehingga 20 MB. Fail kekal pada peranti ini dan disertakan dalam sandaran. Fon atau aksara yang tiada menggunakan fon gantian sistem.",
+    "preview": "Sesuaikan halaman mula anda. The quick brown fox jumps over the lazy dog. 0123456789",
+    "default_active": "Menggunakan fon lalai.",
+    "system_active": "Fon dipasang yang dipilih: {name}.",
+    "file_active": "Fon diimport: {name}.",
+    "loading": "Mengesahkan dan menyimpan fon…",
+    "unavailable": "Fon yang disimpan tidak dapat dimuatkan. Menggunakan fon lalai; import semula fail untuk memulihkannya.",
+    "too_large": "Pilih fail fon yang tidak kosong dan tidak melebihi 20 MB.",
+    "invalid": "Fon ini tidak dapat dimuatkan. Pilih fail TTF, OTF, WOFF atau WOFF2 yang sah.",
+    "save_failed": "Fon tidak dapat disimpan pada peranti ini. Fon sebelumnya tidak berubah."
+  },
+  "google_apps": {
+    "title": "Apl Google",
+    "close": "Tutup",
+    "all_products": "Lagi daripada Google",
+    "services": {
+      "search": "Carian",
+      "maps": "Peta",
+      "youtube": "YouTube",
+      "play": "Play",
+      "news": "Berita",
+      "gmail": "Gmail",
+      "meet": "Meet",
+      "chat": "Chat",
+      "drive": "Drive",
+      "business": "Profil Perniagaan",
+      "gemini": "Gemini",
+      "calendar": "Kalendar",
+      "photos": "Foto",
+      "translate": "Terjemah",
+      "docs": "Dokumen",
+      "sheets": "Helaian",
+      "slides": "Slaid",
+      "contacts": "Kenalan",
+      "keep": "Keep"
+    }
+  },
+  "connector": {}
 }

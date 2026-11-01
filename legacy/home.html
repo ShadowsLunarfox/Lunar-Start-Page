@@ -12,6 +12,8 @@
   <link rel="icon" type="image/png" href="../resource/icons/lunar-v2-32.png">
   <!-- Core stylesheets. Theme display fonts are loaded lazily after first paint. -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles/google-apps.css">
+  <link rel="stylesheet" href="../styles/custom-font.css">
   <link rel="stylesheet" href="../styles/legal-consent.css">
   <link rel="stylesheet" href="themes/clocks/clock-styles.css">
   <link id="theme-style-link" rel="stylesheet">
@@ -22,8 +24,19 @@
   <!-- Wallpaper image layer used for custom background uploads. -->
   <div class="background-layer"></div>
   <input id="background-upload" type="file" accept="image/*,.gif,video/mp4,.mp4" hidden>
+  <script src="../script/custom-font.js"></script>
   <script src="script/prepaint.js"></script>
   <div id="app-notices" class="app-notices" aria-live="polite" aria-atomic="true"></div>
+  <section id="google-apps-panel" class="google-apps-panel" role="dialog" aria-modal="false" aria-labelledby="google-apps-heading" hidden>
+    <div class="google-apps-head">
+      <h2 id="google-apps-heading" data-i18n="google_apps.title">Google apps</h2>
+      <button class="google-apps-small-button" type="button" data-apps-close aria-label="Close" data-i18n-aria-label="google_apps.close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+    </div>
+    <div class="google-apps-content"></div>
+  </section>
+
+
+  <div class="google-apps-controls"><button id="google-apps-toggle" class="google-apps-toggle" type="button" aria-label="Google apps" aria-haspopup="dialog" aria-expanded="false" aria-controls="google-apps-panel" data-i18n-aria-label="google_apps.title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="5" r="1.6"/><circle cx="12" cy="5" r="1.6"/><circle cx="19" cy="5" r="1.6"/><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/><circle cx="5" cy="19" r="1.6"/><circle cx="12" cy="19" r="1.6"/><circle cx="19" cy="19" r="1.6"/></svg></button></div>
 
   <!-- Draggable clock block. -->
   <aside class="floating-clock" aria-label="Current time" data-i18n-aria-label="clock.current_time" data-draggable-id="clock">
@@ -367,6 +380,37 @@
                 </div>
               </label>
             </div>
+          </div>
+          <div class="settings-subsection custom-font-controls">
+            <div class="settings-subhead">
+              <h5 data-i18n="fonts.title">Custom font</h5>
+              <p data-i18n="fonts.desc">Choose an installed font or import a font file. Both interfaces use the same choice.</p>
+            </div>
+            <label for="custom-font-family">
+              <span data-i18n="fonts.family">Installed font name</span>
+              <input id="custom-font-family" type="text" list="custom-font-options" maxlength="100" autocomplete="off" spellcheck="false" placeholder="e.g. Segoe UI or Microsoft YaHei" data-i18n-placeholder="fonts.placeholder" aria-describedby="custom-font-help">
+            </label>
+            <datalist id="custom-font-options">
+              <option value="Segoe UI"></option>
+              <option value="Arial"></option>
+              <option value="Georgia"></option>
+              <option value="Times New Roman"></option>
+              <option value="Courier New"></option>
+              <option value="Consolas"></option>
+              <option value="Microsoft YaHei"></option>
+              <option value="Microsoft JhengHei"></option>
+              <option value="Yu Gothic"></option>
+              <option value="Malgun Gothic"></option>
+            </datalist>
+            <div class="custom-font-actions">
+              <button id="custom-font-apply" class="accent-button" type="button" data-font-action data-i18n="fonts.apply">Apply font</button>
+              <button id="custom-font-import" class="secondary-button" type="button" data-font-action data-i18n="fonts.import">Import font file</button>
+              <button id="custom-font-reset" class="ghost-button" type="button" data-font-action data-i18n="fonts.reset">Use default font</button>
+            </div>
+            <input id="custom-font-file" type="file" accept=".ttf,.otf,.woff,.woff2" hidden>
+            <p id="custom-font-status" class="custom-font-note" role="status" aria-live="polite"></p>
+            <p id="custom-font-help" class="custom-font-note" data-i18n="fonts.hint">TTF, OTF, WOFF or WOFF2, up to 20 MB. Files stay on this device and are included in backups. Missing fonts or characters use a system fallback.</p>
+            <p class="custom-font-preview" data-i18n="fonts.preview">The quick brown fox jumps over the lazy dog. 0123456789</p>
           </div>
           <div class="settings-subsection">
             <div class="settings-subhead">

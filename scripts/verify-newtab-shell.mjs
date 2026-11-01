@@ -3,9 +3,10 @@ import {spawn} from 'node:child_process';
 import {mkdtemp,readFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
+import {createServer} from 'node:http';
 const root=process.cwd(),profile=await mkdtemp(path.join(tmpdir(),'lunar-newtab-qa-'));
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-let edge,socket,send;
+let edge,socket,send,destinationServer;
 try{
  edge=spawn('C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',['--headless=new','--no-first-run','--no-default-browser-check','--remote-debugging-port=0',`--user-data-dir=${profile}`,`--disable-extensions-except=${root}`,`--load-extension=${root}`,'about:blank'],{windowsHide:true,stdio:'ignore'});
  let port;for(let count=0;;count++){try{port=Number((await readFile(path.join(profile,'DevToolsActivePort'),'utf8')).split('\n')[0]);break;}catch(error){if(count>100)throw error;await pause(100);}}
@@ -45,22 +46,47 @@ try{
    return pages.some(target=>target.url.startsWith('edge://settings/appearance'));
  });
  await send('Target.activateTarget',{targetId:targets.find(target=>target.type==='page').id});
+ await evaluate("document.getElementById('google-apps-toggle').click();document.getElementById('google-apps-link-gmail').href='about:blank#lunar-apps-test';document.getElementById('google-apps-link-gmail').click()",true);
+ let appTarget;
+ await wait(async()=>{
+   appTarget=(await(await fetch(endpoint+'/json/list')).json()).find(target=>target.url==='about:blank#lunar-apps-test');
+   return Boolean(appTarget);
+ });
+ if(!await evaluate("document.getElementById('google-apps-panel').hidden",true))throw new Error('Apps launcher did not close after opening a service');
+ if(await evaluate('location.href')!==shellUrl)throw new Error('App shortcut replaced the homepage');
+ await send('Target.closeTarget',{targetId:appTarget.id});
+ await send('Target.activateTarget',{targetId:targets.find(target=>target.type==='page').id});
  if(await evaluate("getHomepageNavigationTarget() !== parent",true))throw new Error('Search does not target the New Tab host');
- await evaluate("document.getElementById('toggle-system-monitor').click();document.getElementById('monitor-enable').click()",true);
- await wait(()=>evaluate("document.getElementById('monitor-cpu-meter').hasAttribute('aria-valuenow')",true));
  await evaluate("document.getElementById('interface-version').value='legacy';document.getElementById('interface-version').dispatchEvent(new Event('change'))",true);
  await wait(()=>evaluate("document.documentElement.dataset.interfaceVersion==='legacy'&&document.body.classList.contains('app-ready')",true));
  if(await evaluate('location.href')!==shellUrl)throw new Error('Switching to legacy exposed its URL');
- if(await evaluate("Boolean(window.lunarSystemMonitor||document.getElementById('system-monitor'))",true))throw new Error('Modern monitoring code leaked into legacy');
  await evaluate("document.getElementById('interface-version').value='modern';document.getElementById('interface-version').dispatchEvent(new Event('change'))",true);
  await wait(()=>evaluate("document.documentElement.dataset.interfaceVersion==='modern'&&document.body.classList.contains('app-ready')",true));
- await wait(()=>evaluate("document.getElementById('monitor-cpu-meter').hasAttribute('aria-valuenow')",true));
  if(await evaluate('location.href')!==shellUrl)throw new Error('Switching to modern exposed its URL');
- await evaluate("document.getElementById('monitor-manage').click();document.getElementById('monitor-disable').click()",true);
- await wait(()=>evaluate("document.getElementById('system-monitor').hidden",true));
- await evaluate("document.getElementById('monitor-setup-dialog').close();SEARCH_ENGINES.google.url=chrome.runtime.getURL('connector.html')+'?q=%s';document.getElementById('search-input').value='new tab navigation';document.getElementById('search-form').requestSubmit()",true);
+ await evaluate("SEARCH_ENGINES.google.url=chrome.runtime.getURL('connector.html')+'?q=%s';document.getElementById('search-input').value='new tab navigation';document.getElementById('search-form').requestSubmit()",true);
  await wait(()=>evaluate("location.pathname==='/connector.html'"));
  if(await evaluate("Boolean(document.getElementById('lunar-start-frame'))"))throw new Error('Search provider remained embedded');
- console.log('PASS: native New Tab entry stays unchanged across modern/legacy switches; the browser theme button opens native Edge appearance; framed permissions and real CPU readings work; searches leave the host normally.');
- console.log(JSON.stringify({newTabDocument:shellUrl,searchDestination:await evaluate('location.pathname')}));
-}finally{if(send)await send('Browser.close').catch(()=>{});socket?.close();edge?.kill();}
+ const searchDestination=await evaluate('location.pathname');
+ // A real website can refuse frames. Bookmark clicks must navigate the whole tab.
+ destinationServer=createServer((request,response)=>{
+   response.writeHead(200,{'Content-Type':'text/html; charset=utf-8','X-Frame-Options':'DENY','Content-Security-Policy':"frame-ancestors 'none'"});
+   response.end('<!doctype html><html><head><title>Navigation destination</title></head><body data-navigation-destination>Bookmark opened as a full page.</body></html>');
+ });
+ await new Promise(resolve=>destinationServer.listen(0,'127.0.0.1',resolve));
+ const destinationOrigin=`http://127.0.0.1:${destinationServer.address().port}`;
+ const bookmarkDestinations=[];
+ for(const version of ['modern','legacy']){
+   await send('Page.navigate',{url:'edge://newtab/'});
+   await wait(()=>evaluate("document.body.classList.contains('app-ready')",true));
+   await evaluate(`document.getElementById('interface-version').value=${JSON.stringify(version)};document.getElementById('interface-version').dispatchEvent(new Event('change'))`,true);
+   await wait(()=>evaluate(`document.documentElement.dataset.interfaceVersion===${JSON.stringify(version)}&&document.body.classList.contains('app-ready')`,true));
+   const destination=destinationOrigin+'/?version='+version;
+   await evaluate(`state.links=[{id:'navigation-fixture',name:'Navigation fixture',url:${JSON.stringify(destination)},pinned:false,icon:chrome.runtime.getURL('resource/icons/lunar-v2-32.png')}];renderCollection();document.querySelector('.shortcut-main .shortcut-title').click()`,true);
+   await wait(()=>evaluate(`location.href===${JSON.stringify(destination)}`));
+   if(!await evaluate("Boolean(document.querySelector('[data-navigation-destination]'))"))throw new Error('Bookmark destination did not load as a full page: '+version);
+   if((await send('Page.getFrameTree')).frameTree.childFrames?.length)throw new Error('Bookmark destination is still framed: '+version);
+   bookmarkDestinations.push(version);
+ }
+ console.log('PASS: native New Tab entry stays unchanged across modern/legacy switches; the app launcher opens a new tab; native appearance works; searches and modern/legacy bookmark clicks leave the host, including websites that prohibit framing.');
+ console.log(JSON.stringify({newTabDocument:shellUrl,searchDestination,bookmarkDestinations}));
+}finally{if(send)await send('Browser.close').catch(()=>{});socket?.close();edge?.kill();destinationServer?.close();}

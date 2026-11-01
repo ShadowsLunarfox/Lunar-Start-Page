@@ -158,4 +158,16 @@ function deriveNameFromUrl(url) {
   }
 }
 
-if (typeof importScripts === "function") importScripts("script/widget-background-state.js", "script/system-usage.js", "script/system-monitor-broker.js", "script/windows-media-broker.js");
+// Remove data and wake-up tasks left by the retired performance widget.
+async function clearRetiredPerformanceData() {
+  const features = ["system", "gpu"];
+  const cleanup = [
+    () => extensionApi?.storage?.local?.remove(features.map(feature => `lunarBackgroundWidget:v2:${feature}`)),
+    () => extensionApi?.storage?.session?.remove(features.map(feature => `lunarWidgetLatest:v2:${feature}`)),
+    () => extensionApi?.alarms?.clear("lunar-system-monitor-background")
+  ];
+  await Promise.allSettled(cleanup.map(async action => action()));
+}
+void clearRetiredPerformanceData();
+
+if (typeof importScripts === "function") importScripts("script/widget-background-state.js", "script/windows-media-broker.js");

@@ -47,7 +47,7 @@ const DEFAULT_SEARCH_SUGGESTIONS = [
 ];
 
 const SEARCH_ENGINES = {
-  google: { url: "https://www.google.com/search?q=%s", label: "Google", color: "#4285f4", icon: "resource/icons/logo/google.ico", category: "mainstream" },
+  google: { url: "https://www.google.com/search?q=%s", label: "Google", color: "#4285f4", icon: "resource/icons/google-apps/search.svg", category: "mainstream" },
   duckduckgo: { url: "https://duckduckgo.com/?q=%s", label: "DuckDuckGo", color: "#de5833", icon: "resource/icons/logo/duckduckgo.ico", category: "mainstream" },
   bing: { url: "https://www.bing.com/search?q=%s", label: "Bing", color: "#008373", icon: "resource/icons/logo/bing.ico", category: "mainstream" },
   brave: { url: "https://search.brave.com/search?q=%s", label: "Brave", color: "#fb542b", icon: "resource/icons/logo/brave.ico", category: "niche" },
@@ -150,6 +150,7 @@ const DEFAULT_SETTINGS = {
   dropdownColor: "#202823",
   sliderTrackColor: "#354039",
   sliderFillColor: "#b6d7c3",
+  font: { type: "system", family: "", id: "", name: "" },
   fontScale: 100,
   radius: 24,
   panelBlur: 22,
@@ -169,21 +170,18 @@ const DEFAULT_SETTINGS = {
     clock: { x: 0, y: 0 },
     search: { x: 0, y: 0 },
     collection: { x: 0, y: 0 },
-    player: { x: 0, y: 0 },
-    monitor: { x: 0, y: 0 }
+    player: { x: 0, y: 0 }
   },
   panelDesiredPositions: {
     clock: { x: 0, y: 0 },
     search: { x: 0, y: 0 },
     collection: { x: 0, y: 0 },
-    player: { x: 0, y: 0 },
-    monitor: { x: 0, y: 0 }
+    player: { x: 0, y: 0 }
   },
   panelScales: {
     clock: 1,
     search: 1,
     collection: 1,
-    player: 1,
-    monitor: 1
+    player: 1
   }
 };

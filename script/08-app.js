@@ -192,11 +192,12 @@ async function initialize() {
   );
 
   bindEvents();
+  globalThis.lunarFonts?.initialize();
+  globalThis.lunarGoogleApps?.initialize();
   startClock();
   bindPendingLinkSync();
   primeCachedLocalization();
   window.lunarMediaPlayer?.initialize();
-  window.lunarSystemMonitor?.initialize();
   const localizationReady = initializeLocalization();
 
   renderAll({ includeBackground: false });

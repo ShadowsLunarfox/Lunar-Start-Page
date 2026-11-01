@@ -380,5 +380,51 @@
     "open": "브라우저 테마 색상",
     "unavailable": "브라우저 색상을 변경하려면 Chrome 또는 Edge에서 설치된 확장 프로그램을 열어 주세요.",
     "failed": "브라우저 테마 설정을 열 수 없습니다. 다시 시도하세요."
-  }
+  },
+  "fonts": {
+    "title": "사용자 지정 글꼴",
+    "desc": "설치된 글꼴 이름을 입력하거나 글꼴 파일을 가져오세요. 새 UI와 이전 UI가 같은 설정을 사용합니다.",
+    "family": "설치된 글꼴 이름",
+    "placeholder": "예: Malgun Gothic, Segoe UI",
+    "apply": "글꼴 적용",
+    "import": "글꼴 파일 가져오기",
+    "reset": "기본 글꼴로 복원",
+    "hint": "TTF, OTF, WOFF, WOFF2 지원, 최대 20 MB. 파일은 이 기기에만 저장되며 백업에 포함됩니다. 없는 글꼴이나 문자는 시스템 대체 글꼴을 사용합니다.",
+    "preview": "나만의 시작 페이지를 꾸며 보세요. The quick brown fox. 0123456789",
+    "default_active": "기본 글꼴을 사용 중입니다.",
+    "system_active": "선택한 설치 글꼴: {name}.",
+    "file_active": "가져온 글꼴: {name}.",
+    "loading": "글꼴 확인 및 저장 중…",
+    "unavailable": "저장된 글꼴을 불러올 수 없어 기본 글꼴을 사용합니다. 파일을 다시 가져오세요.",
+    "too_large": "비어 있지 않은 20 MB 이하의 글꼴 파일을 선택하세요.",
+    "invalid": "이 글꼴을 불러올 수 없습니다. 유효한 TTF, OTF, WOFF 또는 WOFF2 파일을 선택하세요.",
+    "save_failed": "이 기기에 글꼴을 저장하지 못했습니다. 이전 글꼴은 변경되지 않았습니다."
+  },
+  "google_apps": {
+    "title": "Google 앱",
+    "close": "닫기",
+    "all_products": "더 많은 Google 제품",
+    "services": {
+      "search": "검색",
+      "maps": "지도",
+      "youtube": "YouTube",
+      "play": "Play",
+      "news": "뉴스",
+      "gmail": "Gmail",
+      "meet": "Meet",
+      "chat": "Chat",
+      "drive": "드라이브",
+      "business": "비즈니스 프로필",
+      "gemini": "Gemini",
+      "calendar": "캘린더",
+      "photos": "포토",
+      "translate": "번역",
+      "docs": "문서",
+      "sheets": "스프레드시트",
+      "slides": "프레젠테이션",
+      "contacts": "주소록",
+      "keep": "Keep"
+    }
+  },
+  "connector": {}
 }

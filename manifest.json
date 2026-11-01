@@ -39,5 +39,7 @@
     "contextMenus",
     "activeTab"
   ],
-  "optional_permissions": ["nativeMessaging", "system.cpu", "system.memory"]
+  "optional_permissions": [
+    "nativeMessaging"
+  ]
 }
