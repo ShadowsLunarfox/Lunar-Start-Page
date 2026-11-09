@@ -23,7 +23,8 @@
     element.className = "google-apps-tile";
     element.id = `google-apps-link-${app.id}`;
     element.href = app.url;
-    element.target = "_blank";
+    // Leave the New Tab host frame and open the service in the current tab.
+    element.target = "_top";
     element.rel = "noopener noreferrer";
     const image = document.createElement("img");
     image.src = new URL(app.icon + "?v=20261101", iconBase).href;
@@ -52,7 +53,7 @@
     footer.className = "google-apps-footer";
     const more = document.createElement("a");
     more.href = "https://about.google/products/";
-    more.target = "_blank";
+    more.target = "_top";
     more.rel = "noopener noreferrer";
     more.textContent = label("all_products");
     footer.append(more);

@@ -31,7 +31,7 @@ On first opening, both interfaces show a required agreement dialog with links to
 | 🔖 **Shortcuts & bookmarks** | Add, edit, pin, and arrange your favorite links. Import or export your bookmark list for backup. |
 | 🎨 **Modern interface** | A unified interface with light and dark display modes, adjustable colors, typography, spacing, transparency, and blur. |
 | **Custom fonts** | In appearance settings, enter an installed font name or import a TTF, OTF, WOFF or WOFF2 file (up to 20 MB). Preview it, restore the default, and share the choice between modern and legacy mode. Font files stay on the device and are included in backups. |
-| **Google apps launcher** | Open the nine-dot button at the top right for 19 Google service shortcuts in one list, without an account entry or favorites section. Icons are bundled locally, and links open in new tabs. |
+| **Google apps launcher** | Open the nine-dot button at the top right for 19 Google service shortcuts in one list, without an account entry or favorites section. Icons are bundled locally, and links open in the current tab. |
 | ⚙️ **Organized settings** | Four categories bring related controls together: Home, Appearance & wallpaper, Search, and Backup & tools. |
 | 🔎 **Find saved sites** | Filter shortcuts by name or address, see the matching count, and clear the filter without changing saved data. |
 | 🖼️ **Custom wallpapers** | Pick a built-in background or use your own JPG, PNG, WebP, GIF, or MP4 file. |
@@ -106,7 +106,7 @@ Run `node scripts/verify-interface-version.mjs` for routing, local theme/cache b
 
 Run `node scripts/check-browser-ui.mjs --fonts-only` for installed-font selection, real font-file decoding, reload persistence, shared modern/legacy fonts, invalid-file handling, portable backups, translations and narrow layouts. It uses a fresh temporary browser profile and Windows' installed Arial as test input; set `LUNAR_TEST_FONT` to another installed TTF if needed. Imported fonts apply only inside Lunar; the extension does not install fonts into Windows or upload them.
 
-The Google apps launcher is implemented inside Lunar. Both interfaces show the same service list; account pictures and account information are not read. Opening a shortcut takes you to the service's normal website. No additional browser permission is required. Run `node scripts/check-browser-ui.mjs --apps-only` to check menu interactions, service links, languages and small viewports. `node scripts/verify-newtab-shell.mjs` checks actual app-link opening and confirms that modern and legacy bookmark clicks navigate the full tab, including websites that prohibit embedding.
+The Google apps launcher is implemented inside Lunar. Both interfaces show the same service list; account pictures and account information are not read. Opening a shortcut or the all-products link takes you to the normal website in the current tab. No additional browser permission is required. Run `node scripts/check-browser-ui.mjs --apps-only` to check menu interactions, service links, languages and small viewports. `node scripts/verify-newtab-shell.mjs` confirms that modern and legacy app links, all-products links and bookmark clicks navigate the current full tab, including websites that prohibit embedding.
 
 Run `node scripts/verify-quick-save.mjs` for delivery to both versions, unopened-version retention, rapid saves, stale-index recovery, URL deduplication, and retry after local saving fails. The version browser checks also exercise shared right-click delivery through both interfaces' import and rendering code.
 

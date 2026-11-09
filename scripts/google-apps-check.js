@@ -23,16 +23,18 @@
     let modern=await open('modern');const legacy=await open('legacy');
     show(modern);show(legacy);
     assert(toggle(modern).getAttribute('aria-expanded')==='true','Launcher did not open');
-    assert(panel(modern).querySelectorAll('a.google-apps-tile').length===19,'Service catalog is incomplete');
-    for(const link of panel(modern).querySelectorAll('a.google-apps-tile')){
-      assert(link.target==='_blank'&&link.rel.includes('noopener')&&link.href.startsWith('https://'),'Unsafe or framed service link');
+    for(const page of [modern,legacy]){
+      assert(panel(page).querySelectorAll('a.google-apps-tile').length===19,'Service catalog is incomplete');
+      for(const link of panel(page).querySelectorAll('a')){
+        assert(link.target==='_top'&&link.rel.includes('noopener')&&link.href.startsWith('https://'),'Service link does not navigate the current full tab');
+      }
     }
     // Hidden test frames do not trigger lazy image loading; request their icons explicitly.
     panel(modern).querySelectorAll('.google-apps-grid img').forEach(img=>{img.loading='eager';});
     await wait(()=>[...panel(modern).querySelectorAll('.google-apps-grid img')].every(img=>img.complete&&img.naturalWidth>0));
     assert([...panel(modern).querySelectorAll('img')].every(img=>new URL(img.src).origin===location.origin),'Launcher requests remote icons');
     for(const page of [modern,legacy])assert(!page.doc.querySelector('#google-apps-link-account,.google-apps-favorites,[data-apps-edit]'),'Removed account or favorites UI remains');
-    record('Both interfaces open a 19-service list with local icons and new-tab links');
+    record('Both interfaces open a 19-service list with local icons and current-tab links');
 
     const first=modern.doc.getElementById('google-apps-link-search');
     first.focus();
