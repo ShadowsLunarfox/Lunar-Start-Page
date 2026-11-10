@@ -43,19 +43,35 @@ if(suppliedExecutable>=0) {
   if(!process.argv[suppliedExecutable+1]||process.argv[suppliedExecutable+1].startsWith('--'))throw new Error('--native-executable requires a prebuilt connector file');
   executable=path.resolve(root,process.argv[suppliedExecutable+1]);
 } else {
-  const build=spawnSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(root,'native/windows-media/Build.ps1')],{cwd:root,windowsHide:true,encoding:'utf8'});
+  const build=spawnSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(root,'native/windows-media-source/Build.ps1')],{cwd:root,windowsHide:true,encoding:'utf8'});
   if(build.error||build.status!==0)throw new Error(build.error?.message||build.stdout+build.stderr);
   executable=build.stdout.trim().split(/\r?\n/).at(-1);
-  if(!path.resolve(executable).startsWith(path.join(root,'native/windows-media/bin')+path.sep))throw new Error('Build returned an unexpected connector path');
+  if(!path.resolve(executable).startsWith(path.join(root,'native/windows-media-source/bin')+path.sep))throw new Error('Build returned an unexpected connector path');
 }
 const executableBytes=await readFile(executable);
 if(executableBytes.subarray(0,2).toString()!=='MZ')throw new Error('The supplied connector is not a Windows executable');
+const suffix=`${manifest.version}${draft?'-draft':''}`;
+const connectorConfig=Buffer.from(JSON.stringify({draft,extensionIds:[config.chromeExtensionId,config.edgeExtensionId].filter(validId)},null,2)+'\n');
+const managerConfigPath=path.join(output,`connector-manager-config-${suffix}.json`);
+await writeFile(managerConfigPath,connectorConfig);
+const managerBuild=spawnSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(root,'native/windows-media-source/Build-Manager.ps1'),'-HostExecutable',executable,'-ConfigPath',managerConfigPath],{cwd:root,windowsHide:true,encoding:'utf8'});
+if(managerBuild.error||managerBuild.status!==0)throw new Error(managerBuild.error?.message||managerBuild.stdout+managerBuild.stderr);
+const managerExecutable=managerBuild.stdout.trim().split(/\r?\n/).at(-1);
+if(!path.resolve(managerExecutable).startsWith(path.join(root,'native/windows-media-source/bin/manager')+path.sep))throw new Error('Build returned an unexpected manager path');
+const managerBytes=await readFile(managerExecutable);
+if(managerBytes.subarray(0,2).toString()!=='MZ')throw new Error('Manager build is not a Windows executable');
 const connector=[];
-for(const name of ['Install.ps1','Install.cmd','Uninstall.ps1','Uninstall.cmd','README.md','Host.cs','Build.ps1'])connector.push({name,bytes:await readFile(path.join(root,'native/windows-media',name))});
+for(const name of ['Install.ps1','Install.cmd','Uninstall.ps1','Uninstall.cmd','README.md','Host.cs','Build.ps1','Manager.cs','DarkUi.cs','ManagerLocale.cs','Build-Manager.ps1'])connector.push({name,bytes:await readFile(path.join(root,'native/windows-media-source',name))});
+for(const language of ['en','zh-CN','yue','ja','ko','th','ms']) {
+  const name=`languages/${language}.json`;
+  connector.push({name,bytes:await readFile(path.join(root,'native/windows-media-source',name))});
+}
+connector.push({name:'LunarConnectorManager.exe',bytes:managerBytes});
+connector.push({name:'manager-logo.png',bytes:await readFile(path.join(root,'resource/icons/lunar-v2-128.png'))});
 connector.push({name:'LICENSE',bytes:await readFile(path.join(root,'LICENSE'))});
 for(const file of files.filter(file=>file.name==='PRIVACY.md'||file.name==='TERMS.md'||file.name.startsWith('docs/legal/')))connector.push(file);
 connector.push({name:'payload/LunarMediaHost.exe',bytes:executableBytes});
-connector.push({name:'connector-config.json',bytes:Buffer.from(JSON.stringify({draft,extensionIds:[config.chromeExtensionId,config.edgeExtensionId].filter(validId)},null,2)+'\n')});
+connector.push({name:'connector-config.json',bytes:connectorConfig});
 const table=Array.from({length:256},(_,n)=>{for(let k=0;k<8;k++)n=n&1?0xedb88320^(n>>>1):n>>>1;return n>>>0;});
 const crc=bytes=>{let n=0xffffffff;for(const b of bytes)n=table[(n^b)&255]^(n>>>8);return(n^0xffffffff)>>>0;};
 function zip(entries) {
@@ -70,10 +86,13 @@ function zip(entries) {
   const central=Buffer.concat(directory),end=Buffer.alloc(22);end.writeUInt32LE(0x06054b50);end.writeUInt16LE(entries.length,8);end.writeUInt16LE(entries.length,10);end.writeUInt32LE(central.length,12);end.writeUInt32LE(offset,16);
   return Buffer.concat([...blocks,central,end]);
 }
-const suffix=`${manifest.version}${draft?'-draft':''}`;
 const artifacts=[{name:`LunarStart-extension-${suffix}.zip`,entries:files},{name:`LunarStart-WindowsConnector-${suffix}.zip`,entries:connector}];
 const sums=[];
 for(const artifact of artifacts){const bytes=zip(artifact.entries);await writeFile(path.join(output,artifact.name),bytes);sums.push(`${createHash('sha256').update(bytes).digest('hex')}  ${artifact.name}`);console.log(`${artifact.name}: ${artifact.entries.length} files, ${bytes.length} bytes`);}
+const managerName=`LunarStart-ConnectorManager-${suffix}.exe`;
+await writeFile(path.join(output,managerName),managerBytes);
+sums.push(`${createHash('sha256').update(managerBytes).digest('hex')}  ${managerName}`);
+console.log(`${managerName}: standalone manager, ${managerBytes.length} bytes`);
 await writeFile(path.join(output,`SHA256SUMS-${suffix}.txt`),sums.join('\n')+'\n');
-await writeFile(path.join(output,`release-report-${suffix}.json`),JSON.stringify({draft,config,extensionFiles:files.map(f=>f.name),connectorFiles:connector.map(f=>f.name)},null,2)+'\n');
+await writeFile(path.join(output,`release-report-${suffix}.json`),JSON.stringify({draft,config,managerFile:managerName,extensionFiles:files.map(f=>f.name),connectorFiles:connector.map(f=>f.name)},null,2)+'\n');
 if(draft)console.log('DRAFT: for local/reviewer testing. Official IDs and public policy/download URLs must be configured before a public release.');

@@ -1,2 +1,3 @@
-native/windows-media/bin/
+native/windows-media-source/bin/
+native/windows-media/*.exe
 dist/

@@ -28,10 +28,10 @@
 
   function render(node, message, player) {
     const tokens = {
-      install: ['code', 'Install.cmd'], uninstall: ['code', 'Uninstall.cmd'],
+      install: ['code', 'LunarConnectorManager.exe'], uninstall: ['code', 'LunarConnectorManager.exe'],
       chrome: ['code', 'chrome://extensions'], edge: ['code', 'edge://extensions'],
       path: ['code', '%LOCALAPPDATA%\\LunarStart\\MediaConnector'],
-      cache: ['code', 'native\\windows-media\\bin'], yes: ['code', 'YES'],
+      cache: ['code', 'native\\windows-media-source\\bin'], yes: ['code', 'YES'],
       enable: ['strong', player.enable], disable: ['strong', player.disable], check: ['strong', player.check_connection]
     };
     node.replaceChildren(...message.split(/(\{\w+\})/).map(part => {

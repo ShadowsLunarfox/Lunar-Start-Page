@@ -29,10 +29,15 @@ for(const kind of ['PRIVACY','TERMS'])for(const locale of ['zh-CN','ja','ko','th
 const packed=JSON.parse(ext.files.get('manifest.json'));
 assert(!packed.permissions.includes('nativeMessaging')&&!packed.permissions.includes('tabs'));
 assert(packed.permissions.includes('activeTab')&&packed.optional_permissions.includes('nativeMessaging'));
-for(const name of ['payload/LunarMediaHost.exe','Install.ps1','Uninstall.ps1','connector-config.json','LICENSE','Host.cs'])assert(native.files.has(name),`Missing connector artifact: ${name}`);
+for(const name of ['payload/LunarMediaHost.exe','LunarConnectorManager.exe','Manager.cs','DarkUi.cs','ManagerLocale.cs','Build-Manager.ps1','manager-logo.png','Install.ps1','Uninstall.ps1','connector-config.json','LICENSE','Host.cs'])assert(native.files.has(name),`Missing connector artifact: ${name}`);
+for(const language of ['en','zh-CN','yue','ja','ko','th','ms'])assert(native.files.has(`languages/${language}.json`),`Missing manager language: ${language}`);
 assert.equal(native.files.get('payload/LunarMediaHost.exe').subarray(0,2).toString(),'MZ');
 assert.deepEqual(JSON.parse(native.files.get('connector-config.json')).extensionIds,[],'Draft must not embed the local development extension ID');
 assert(!native.files.get('Install.ps1').toString().includes('Secure Preferences'),'Installer must not inspect browser profiles');
 const sums=await readFile(new URL(`dist/SHA256SUMS-${suffix}.txt`,root),'utf8');
 for(const [name,artifact] of [[extName,ext],[nativeName,native]])assert(sums.includes(`${createHash('sha256').update(artifact.bytes).digest('hex')}  ${name}`));
-console.log(`PASS: separate ZIP contents, scoped permissions, native payload, no development ID in draft, and SHA-256 checksums (${ext.files.size} extension files; ${native.files.size} connector files).`);
+const managerName=`LunarStart-ConnectorManager-${suffix}.exe`,manager=await readFile(new URL(`dist/${managerName}`,root));
+assert.equal(manager.subarray(0,2).toString(),'MZ');
+assert.deepEqual(manager,native.files.get('LunarConnectorManager.exe'),'Standalone and ZIP manager must match');
+assert(sums.includes(`${createHash('sha256').update(manager).digest('hex')}  ${managerName}`));
+console.log(`PASS: separate ZIP contents, scoped permissions, native payload, standalone EXE, no development ID in draft, and SHA-256 checksums (${ext.files.size} extension files; ${native.files.size} connector files).`);

@@ -2,6 +2,7 @@ param(
     [string[]]$ExtensionId,
     [switch]$Yes,
     [switch]$PrepareOnly,
+    [switch]$Repair,
     [string]$InstallDirectory = (Join-Path $env:LOCALAPPDATA 'LunarStart\MediaConnector'),
     [switch]$Uninstall
 )
@@ -39,7 +40,17 @@ $payload = [IO.Path]::GetFullPath($payload)
 $digest = (Get-FileHash -LiteralPath $payload -Algorithm SHA256).Hash.ToLowerInvariant()
 $exeName = 'LunarMediaHost-' + $digest.Substring(0, 12) + '.exe'
 $executable = Join-Path $installRoot $exeName
-if ((Test-Path -LiteralPath $executable) -and (Get-FileHash -LiteralPath $executable -Algorithm SHA256).Hash.ToLowerInvariant() -ne $digest) { throw 'Existing connector executable does not match this package. No registration changed.' }
+if ((Test-Path -LiteralPath $executable) -and (Get-FileHash -LiteralPath $executable -Algorithm SHA256).Hash.ToLowerInvariant() -ne $digest) {
+    if (!$Repair -or $null -eq $previous -or $previous.files -notcontains $exeName) { throw 'Existing connector executable does not match this package. No registration changed.' }
+    # Explicit repair may restore a damaged owned executable. Check the entire
+    # ownership boundary before stopping a process or replacing any file.
+    foreach ($name in $previous.files) {
+        $ownedPath = [IO.Path]::GetFullPath((Join-Path $installRoot $name))
+        if ($name -notmatch '^(?:LunarMediaHost-[a-f0-9]{12}\.exe|com\.lunarfox\.lunar_media\.json|Uninstall\.ps1|Uninstall\.cmd|installation\.json)$' -or (Split-Path -Parent $ownedPath) -ne $installRoot) { throw 'Unsafe owned-file entry. No repair changes made.' }
+    }
+    # Confirmation still takes place below before repair changes the installation.
+    $replaceDamagedExecutable = $true
+}
 Write-Output 'Lunar Start Windows media connector - optional, current-user installation'
 Write-Output ('Install directory: ' + $installRoot)
 Write-Output ('Allowed extension IDs: ' + (($ids | Sort-Object) -join ', '))
@@ -51,6 +62,18 @@ if (!$Yes -and !$PrepareOnly) {
     if ($answer.Trim() -notin @('Y', 'YES', ([string][char]0x662f))) { Write-Output 'Canceled. No installation changes made.'; exit 2 }
 }
 New-Item -ItemType Directory -Path $installRoot -Force | Out-Null
+if ($replaceDamagedExecutable) {
+    foreach ($process in Get-Process -Name 'LunarMediaHost*' -ErrorAction SilentlyContinue) {
+        try {
+            if ($process.Path -and [IO.Path]::GetFullPath($process.Path) -eq $executable) {
+                Stop-Process -InputObject $process -ErrorAction Stop
+                if (!$process.WaitForExit(5000)) { throw 'The damaged connector is still in use.' }
+            }
+        } catch { Write-Output ('Could not close the damaged connector; file replacement will verify it is available. ' + $_.Exception.Message) }
+    }
+    Copy-Item -LiteralPath $payload -Destination $executable -Force
+    if ((Get-FileHash -LiteralPath $executable -Algorithm SHA256).Hash.ToLowerInvariant() -ne $digest) { throw 'Repair could not verify the restored connector. No registration changed.' }
+}
 if (!(Test-Path -LiteralPath $executable)) { Copy-Item -LiteralPath $payload -Destination $executable }
 foreach ($name in @('Uninstall.ps1', 'Uninstall.cmd')) {
     $sourcePath = Join-Path $PSScriptRoot $name
