@@ -9,7 +9,9 @@
 .workspace-controls .corner-button::after { content: attr(aria-label); position: absolute; top: calc(100% + 8px); right: 0; padding: 6px 9px; border: 1px solid var(--panel-border); border-radius: 7px; background: var(--dropdown); color: var(--dropdown-ink); font-size: var(--font-xs); white-space: nowrap; opacity: 0; pointer-events: none; }
 .workspace-controls .corner-button:hover::after, .workspace-controls .corner-button:focus-visible::after { opacity: 1; }
 .layout-mode-button[aria-pressed="true"] { background: var(--accent-muted); border-color: var(--accent); }
-.start-area { position: relative; z-index: 2; display: grid; flex-shrink: 0; grid-template-columns: minmax(220px, .42fr) minmax(0, 1fr); align-items: center; gap: 28px; padding: 18px 22px; border: 1px solid var(--panel-border); border-radius: var(--ui-radius-xl); background: color-mix(in srgb, var(--panel) 70%, transparent); backdrop-filter: var(--glass-filter-subtle); }
+.start-area { position: relative; z-index: 2; display: grid; flex-shrink: 0; grid-template-columns: minmax(220px, .42fr) minmax(0, 1fr); align-items: center; gap: 28px; padding: 18px 22px; border: 1px solid var(--panel-border); border-radius: var(--ui-radius-xl); }
+/* Keep the glass on a separate surface so clock ticks do not invalidate a filtered ancestor of the search box. */
+.start-area::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: color-mix(in srgb, var(--panel) 70%, transparent); backdrop-filter: var(--glass-filter-subtle); pointer-events: none; }
 .start-area .workspace-intro { justify-items: start; text-align: left; }
 .start-area .workspace-eyebrow, .start-area .workspace-caption { display: none; }
 .start-area .clock-digital { justify-items: start; }
@@ -22,7 +24,8 @@
 .start-area .floating-clock[data-clock-style^="analog"] .analog-clock { width: 104px; height: 104px; }
 .start-area .floating-clock[data-clock-style^="analog"] .analog-face { transform: scale(.72); }
 .start-area .floating-clock[data-clock-style^="analog"] .date-text { font-size: var(--font-xs); }
-.has-custom-panel-layout .start-area, .layout-editing .start-area { z-index: auto; background: transparent; backdrop-filter: none; border-color: transparent; }
+.has-custom-panel-layout .start-area, .layout-editing .start-area { z-index: auto; border-color: transparent; }
+.has-custom-panel-layout .start-area::before, .layout-editing .start-area::before { display: none; }
 body.clock-ui-hidden .workspace-intro { display: none; }
 body.clock-ui-hidden .start-area, body.search-ui-hidden .start-area { grid-template-columns: 1fr; }
 body.clock-ui-hidden.search-ui-hidden .start-area { display: none; }

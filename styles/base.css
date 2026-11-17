@@ -6,7 +6,8 @@ body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-event
 body.app-loading .workspace-controls, body.app-loading .page-shell, body.app-loading .app-footer, body.app-loading .app-notices, body.app-loading .media-player { opacity: 0; pointer-events: none; }
 body.app-loading .workspace-controls * { pointer-events: none; }
 body.app-ready .workspace-controls, body.app-ready .page-shell, body.app-ready .app-footer, body.app-ready .media-player { animation: arrive .4s ease both; }
-body.app-ready .page-shell { animation-delay: .04s; }
+/* Release the opacity effect after the entrance fade so glass panels have a stable backdrop. */
+body.app-ready .page-shell { animation-delay: .04s; animation-fill-mode: backwards; }
 @keyframes arrive { from { opacity: 0; } to { opacity: 1; } }
 button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; transition: background .16s ease, border-color .16s ease, color .16s ease, box-shadow .16s ease; }
