@@ -11,10 +11,10 @@
     terminal: "themes/theme-terminal.css"
   };
   var PRESET_WALLPAPERS = {
-    wallpaper_1: { path: "../themes/wallpaper/wallpaperflare.com_wallpaper (1).jpg", mediaType: "image" },
-    wallpaper_2: { path: "../themes/wallpaper/wallpaperflare.com_wallpaper (2).jpg", mediaType: "image" },
-    wallpaper_3: { path: "../themes/wallpaper/wallpaperflare.com_wallpaper.jpg", mediaType: "image" },
-    komainu_desktop: { path: "../themes/wallpaper/Mp4/Komainu_Desktop.mp4", mediaType: "video" }
+    wallpaper_1: { path: "../themes/wallpaper/blue-marble.jpg", mediaType: "image" },
+    wallpaper_2: { path: "../themes/wallpaper/lunar-earthset.jpg", mediaType: "image" },
+    wallpaper_3: { path: "../themes/wallpaper/cosmic-cliffs.jpg", mediaType: "image" },
+    komainu_desktop: { path: "../themes/wallpaper/Mp4/earthset-loop.mp4", mediaType: "video" }
   };
   var DEFAULTS = {
     theme: "dark",
@@ -121,6 +121,7 @@
 
   function applyWallpaper(background, body, root) {
     var value = background && background.value;
+    if (value && /^(?:https?:)?\/\//i.test(value) && !window.lunarPrivacy?.allowsUrl(value)) return;
     var type = background && background.type;
     var mediaType = background && background.mediaType;
 

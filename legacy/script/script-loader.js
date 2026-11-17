@@ -29,6 +29,5 @@
     });
   }
 
-  // The agreement is shared with modern mode within this browser profile.
-  if (window.lunarLegalConsent) window.lunarLegalConsent.ready.then(loadScripts);
+  loadScripts();
 }());

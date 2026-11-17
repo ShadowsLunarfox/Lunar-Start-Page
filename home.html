@@ -7,6 +7,7 @@
   <title data-i18n="app.title">New Tab</title>
   <script src="script/interface-version.js"></script>
   <script src="script/newtab-navigation.js"></script>
+  <script src="script/feature-privacy.js"></script>
   <script src="script/browser-theme.js" defer></script>
   <script src="script/preflight.js"></script>
   <link rel="icon" type="image/png" href="resource/icons/lunar-v2-32.png">
@@ -14,7 +15,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="styles/google-apps.css">
   <link rel="stylesheet" href="styles/custom-font.css">
-  <link rel="stylesheet" href="styles/legal-consent.css">
+  <link rel="stylesheet" href="styles/feature-privacy.css">
   <link id="wallpaper-style-link" rel="stylesheet">
 </head>
 <body class="app-loading" data-theme="dark">
@@ -149,6 +150,7 @@
               </button>
               <button id="search-all-engines" class="search-all-button" type="button" aria-label="Use selected suggestion engines" aria-pressed="false" data-i18n-aria-label="actions.search_all_engines">Current</button>
             </div>
+          <p class="search-data-notice" data-privacy-text="search_note">Searching sends your query to the selected provider and saves history on this device.</p>
           <div id="search-suggestions" class="search-suggestions" role="listbox" aria-label="Search suggestions" data-i18n-aria-label="search.suggestions_aria" hidden></div>
         </form>
       </div>
@@ -655,6 +657,7 @@
             </div>
             <div id="search-suggestion-engine-list" class="engine-check-list" role="group" aria-label="Suggestion engines" data-i18n-aria-label="settings.search_suggestion_engine_list.label"></div>
           </div>
+          <div class="settings-subsection" data-privacy-settings></div>
         </section>
 
         <section id="settings-page-library" data-settings-page="library" hidden role="tabpanel" aria-labelledby="settings-tab-library" class="settings-section settings-section-wide">
@@ -876,7 +879,6 @@
     </article>
   </template>
 
-  <script src="script/legal-consent.js"></script>
   <script src="script/script-loader.js"></script>
   
 </body>

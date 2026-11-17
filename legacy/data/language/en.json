@@ -461,7 +461,11 @@
     "deepsea": "Deep Sea",
     "ember": "Ember",
     "moss": "Moss",
-    "dusk": "Dusk"
+    "dusk": "Dusk",
+    "wallpaper_1": "NASA · Blue Marble",
+    "wallpaper_2": "NASA · Lunar Earthset",
+    "wallpaper_3": "NASA · Cosmic Cliffs",
+    "komainu_desktop": "NASA · Earthset Loop"
   },
   "background": {
     "current_custom_image": "Current background: Custom image",
@@ -522,17 +526,7 @@
   },
   "legal": {
     "privacy": "Privacy policy",
-    "terms": "Terms of service",
-    "consent": {
-      "title": "Before you begin",
-      "intro": "Please review the Terms of Service and Privacy Policy before using Lunar Start Page.",
-      "language": "Language",
-      "agreement": "I agree to the Terms of Service and acknowledge the Privacy Policy.",
-      "note": "Your agreement is saved only in this browser profile. Optional Windows media access requires separate permission.",
-      "accept": "Accept and continue",
-      "decline": "Decline and leave",
-      "storage_error": "Your agreement could not be saved. Free up browser storage or allow local storage, then try again."
-    }
+    "terms": "Terms of service"
   },
   "browser_theme": {
     "open": "Browser theme colors",
@@ -584,5 +578,22 @@
       "keep": "Keep"
     }
   },
-  "connector": {}
+  "connector": {},
+  "feature_privacy": {
+    "title": "Data use & optional features",
+    "local": "Bookmarks, settings, wallpapers and search history stay in this browser profile. Backups leave it only when you export or share them. Choose optional online features below; each can be turned off here.",
+    "search_note": "Searching sends your query to the selected provider and saves search history on this device.",
+    "suggestions_title": "Online search suggestions",
+    "suggestions_body": "While you type, your query is sent to the selected suggestion providers and their fallback providers (including Google or DuckDuckGo). Multi-engine mode sends it to every checked provider. They receive your IP address and normal request information. Turn this off here or in Search suggestions to stop these requests.",
+    "resources_title": "Online icons, fonts and images",
+    "resources_body": "Loading online shortcut icons sends saved site domains to Google's favicon service. Custom icon or wallpaper URLs contact their hosts, and the legacy Cartoon font contacts Google Fonts. These services receive your IP address and normal request information. This is off by default; bundled and uploaded local assets still work.",
+    "voice_title": "Voice search",
+    "voice_body": "After you start voice search and grant microphone permission, your browser's speech recognition service may process your audio. When recognition finishes, the recognized text is automatically submitted to the selected search provider and saved in local search history. This extension does not keep audio recordings. Stop recording with the microphone button or revoke microphone access in the browser.",
+    "image_title": "Image search",
+    "image_body": "Choosing or dropping an image for image search uploads that file to Google Lens to find matching images. Google receives the image and normal request information. Canceling this notice sends nothing. This extension does not keep the uploaded image.",
+    "enable": "Agree and enable",
+    "disable": "Turn off",
+    "cancel": "Cancel",
+    "storage_error": "This choice could not be saved. Allow local storage or free up space, then try again."
+  }
 }

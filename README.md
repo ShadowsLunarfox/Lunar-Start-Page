@@ -20,7 +20,7 @@
 
 ---
 
-On first opening, both interfaces show a required agreement dialog with links to the published Terms of Service and Privacy Policy. Check the agreement box and choose **Accept and continue** to start the homepage; declining leaves the page. The document versions, agreement time and dialog language stay in the current browser profile and are shared between modern and legacy mode. They are excluded from homepage backups. Clearing extension data requires agreement again. Windows media access remains a separate optional permission.
+Both interfaces open directly without a first-run terms agreement. **Settings → Search → Data use & optional features** explains local storage and each online feature. Online suggestions and external icons, fonts and wallpapers stay off until individually enabled; old settings or backups do not grant consent. Voice and image search explain their data use before first use. Choices stay in the current browser profile, are shared between modern and legacy mode, and can be revoked in the same settings section. Terms and privacy-policy links remain in settings. Windows media retains its separate disclosure and optional permission.
 
 ## ✨ Features
 
@@ -64,6 +64,7 @@ Lunar Start Page is a Manifest V3 extension. You can load it in Chrome or Micros
 
 ## 🧭 Getting started
 
+- Searches send the submitted query to the selected search engine and keep search history locally. The search bar shows this notice. Canceling an optional feature notice keeps that feature off while leaving the homepage usable; no extension-management permission is requested.
 - Open a new tab and use the search bar or your shortcut cards.
 - The Windows media widget is optional and off by default. Click the music-note corner button, read the data/use disclosure, and select **Agree and enable** to request its optional permission. Install the separate Windows connector only if you choose to use it; the extension never installs it automatically. See [connector instructions](native/windows-media-source/README.md). Use the widget's information button to disable it and revoke permission. Canceling or denying permission leaves the homepage available. The widget shares the refresh fade and automatically follows the exact Windows current media session, including a change between videos in the same browser; supported controls depend on that source. No playback starts automatically.
 - The shared start area brings the clock, search engine, voice search, and image search together.
@@ -96,7 +97,7 @@ Run `node scripts/check-browser-ui.mjs --debug-only` for debug-menu checks in an
 
 The browser checks also measure text contrast in both display modes across the homepage, settings, and dialogs, and verify repeated theme switching. Use `node scripts/check-browser-ui.mjs --preview theme=light language=zh-CN` to capture a light-mode debug preview. Saved custom colors are retained; legacy default colors migrate together so light-mode text and panels stay readable.
 
-The modern interface uses a unified layout. The original interface, including its Cartoon, Windows 98, Windows XP, and Terminal skins, is bundled independently under `legacy/`. Both versions use the current wallpaper and icon files from `themes/wallpaper/` and `resource/icons/`. The lightweight new-tab entry reads the saved version before loading a page, so legacy mode does not load modern interface HTML, scripts, styles, or translations. No files from the Downloads folder are required after installation.
+The modern interface uses a unified layout. The original interface, including its Cartoon, Windows 98, Windows XP, and Terminal skins, is bundled independently under `legacy/`. Both versions use the current wallpaper and icon files from `themes/wallpaper/` and `resource/icons/`. The built-in set contains three NASA space images and a silent Earthset video loop; [wallpaper sources and processing](themes/wallpaper/CREDITS.md) are documented separately. Image/video selection and custom uploads remain available, and existing preset choices use the replacement files. The lightweight new-tab entry reads the saved version before loading a page, so legacy mode does not load modern interface HTML, scripts, styles, or translations. No files from the Downloads folder are required after installation.
 
 User data and non-theme preferences synchronize live. Existing collections merge by address on first use, with the first opened interface supplying the initial preferences. Changes are stored per preference and per bookmark field, so concurrent edits to different items or fields cannot overwrite an entire older snapshot. Deletion markers prevent stale tabs and pending deliveries from restoring deleted bookmarks. Reordering, pinning, searching, language, wallpaper, clock, font scale, transparency, spacing, and desired module layout synchronize; card heights adapt to each interface's size range. Actual viewport-constrained panel positions stay local to avoid layout feedback between different designs or window sizes.
 

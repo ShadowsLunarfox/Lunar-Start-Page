@@ -327,7 +327,11 @@
     "deepsea": "Laut dalam",
     "ember": "Bara",
     "moss": "Lumut",
-    "dusk": "Senja"
+    "dusk": "Senja",
+    "wallpaper_1": "NASA · Bumi Biru",
+    "wallpaper_2": "NASA · Bumi dari Bulan",
+    "wallpaper_3": "NASA · Tebing Kosmik",
+    "komainu_desktop": "NASA · Gelung Bumi Terbenam"
   },
   "background": {
     "current_custom_image": "Latar belakang semasa: Imej tersuai",
@@ -438,17 +442,7 @@
   },
   "legal": {
     "privacy": "Dasar privasi",
-    "terms": "Terma perkhidmatan",
-    "consent": {
-      "title": "Sebelum anda bermula",
-      "intro": "Sila baca Terma Perkhidmatan dan Dasar Privasi sebelum menggunakan Lunar Start Page.",
-      "language": "Bahasa",
-      "agreement": "Saya bersetuju dengan Terma Perkhidmatan dan mengakui bahawa saya telah membaca Dasar Privasi.",
-      "note": "Rekod persetujuan disimpan hanya dalam profil pelayar ini. Akses media Windows adalah pilihan dan memerlukan kebenaran berasingan.",
-      "accept": "Setuju dan teruskan",
-      "decline": "Tolak dan keluar",
-      "storage_error": "Rekod persetujuan tidak dapat disimpan. Kosongkan ruang storan pelayar atau benarkan storan setempat, kemudian cuba lagi."
-    }
+    "terms": "Terma perkhidmatan"
   },
   "connector": {
     "page_title": "Penyambung media Windows — Lunar Start Page",
@@ -521,5 +515,22 @@
       "contacts": "Kenalan",
       "keep": "Keep"
     }
+  },
+  "feature_privacy": {
+    "title": "Penggunaan data dan ciri pilihan",
+    "local": "Penanda buku, tetapan, kertas dinding dan sejarah carian disimpan dalam profil pelayar ini. Sandaran hanya keluar daripada peranti apabila anda mengeksport atau berkongsinya. Pilih ciri dalam talian secara berasingan dan matikannya di sini pada bila-bila masa.",
+    "search_note": "Carian menghantar pertanyaan kepada penyedia yang dipilih dan menyimpan sejarah carian pada peranti ini.",
+    "suggestions_title": "Cadangan carian dalam talian",
+    "suggestions_body": "Semasa anda menaip, pertanyaan dihantar kepada perkhidmatan cadangan yang dipilih dan penyedia gantinya, yang mungkin termasuk Google atau DuckDuckGo. Mod berbilang enjin menghantarnya kepada setiap penyedia yang ditandakan. Penyedia menerima alamat IP dan maklumat permintaan biasa. Matikan di sini atau dalam tetapan cadangan carian untuk menghentikan permintaan.",
+    "resources_title": "Ikon, fon dan imej dalam talian",
+    "resources_body": "Memuatkan ikon penanda buku dalam talian menghantar domain laman yang disimpan kepada perkhidmatan favicon Google. URL ikon atau kertas dinding tersuai menghubungi pelayannya, manakala fon Cartoon versi lama menghubungi Google Fonts. Perkhidmatan menerima alamat IP dan maklumat permintaan biasa. Ciri ini dimatikan secara lalai; sumber terbina dalam dan fail daripada peranti masih boleh digunakan.",
+    "voice_title": "Carian suara",
+    "voice_body": "Selepas carian suara dimulakan dan mikrofon dibenarkan, perkhidmatan pengecaman pertuturan pelayar mungkin memproses audio anda. Apabila pengecaman selesai, teks dihantar secara automatik kepada penyedia carian yang dipilih dan disimpan dalam sejarah carian setempat. Sambungan tidak menyimpan rakaman audio. Hentikan dengan butang mikrofon atau tarik balik kebenaran mikrofon dalam pelayar.",
+    "image_title": "Carian imej",
+    "image_body": "Memilih atau melepaskan imej dalam carian imej memuat naik fail itu kepada Google Lens untuk mencari imej yang sepadan. Google menerima imej dan maklumat permintaan biasa. Membatalkan notis ini tidak menghantar imej. Sambungan tidak menyimpan imej yang dimuat naik.",
+    "enable": "Setuju dan aktifkan",
+    "disable": "Matikan",
+    "cancel": "Batal",
+    "storage_error": "Pilihan tidak dapat disimpan. Benarkan storan setempat atau kosongkan ruang, kemudian cuba lagi."
   }
 }

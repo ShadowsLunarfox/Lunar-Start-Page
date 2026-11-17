@@ -44,7 +44,7 @@
     assert(page.getElementById('theme-style'), 'Original legacy theme controls are missing');
     const resources = win.performance.getEntriesByType('resource').map(entry => new URL(entry.name)).filter(url => url.origin === location.origin);
     assert(resources.some(url => url.pathname.endsWith('/legacy/script/08-app.js')), 'Legacy app was not initialized');
-    const allowed = url => url.pathname.startsWith('/legacy/') || ['/script/legal-consent.js', '/styles/legal-consent.css', '/script/newtab-navigation.js', '/script/browser-theme.js', '/script/custom-font.js', '/styles/custom-font.css', '/script/google-apps.js', '/styles/google-apps.css'].includes(url.pathname) || /^\/resource\/icons\/.*\.(?:png|ico|svg)$/.test(url.pathname) || /^\/themes\/wallpaper\/.*\.(?:jpg|jpeg|png|webp|gif|mp4)$/.test(url.pathname);
+    const allowed = url => url.pathname.startsWith('/legacy/') || ['/script/feature-privacy.js', '/styles/feature-privacy.css', '/script/newtab-navigation.js', '/script/browser-theme.js', '/script/custom-font.js', '/styles/custom-font.css', '/script/google-apps.js', '/styles/google-apps.css'].includes(url.pathname) || /^\/resource\/icons\/.*\.(?:png|ico|svg)$/.test(url.pathname) || /^\/themes\/wallpaper\/.*\.(?:jpg|jpeg|png|webp|gif|mp4)$/.test(url.pathname);
     assert(!resources.some(url => url.pathname.startsWith('/legacy/resource/')), 'Legacy mode loaded outdated bundled icons');
     assert(resources.every(allowed), `Legacy mode requested modern interface code: ${resources.filter(url => !allowed(url)).map(url => url.pathname).join(', ')}`);
   };
@@ -73,7 +73,10 @@
     page.querySelector('[data-preset="komainu_desktop"]').click();
     const video = page.querySelector('.background-video');
     await wait(() => video.readyState >= 2);
-    assert(new URL(video.currentSrc).pathname === '/themes/wallpaper/Mp4/Komainu_Desktop.mp4', 'Video wallpaper did not use the current video');
+    assert(new URL(video.currentSrc).pathname === '/themes/wallpaper/Mp4/earthset-loop.mp4', 'Video wallpaper did not use the current video');
+    assert(video.loop && video.muted && video.videoWidth === 1280 && video.videoHeight === 720, 'Replacement video settings: ' + JSON.stringify({loop:video.loop,muted:video.muted,width:video.videoWidth,height:video.videoHeight}));
+    const firstTime = video.currentTime;
+    await wait(() => !video.paused && video.currentTime > firstTime + 0.05);
     page.querySelector('[data-preset="wallpaper_2"]').click();
     await wait(() => page.querySelector('.background-layer').style.backgroundImage.includes('../themes/wallpaper/'));
     page.getElementById('settings-dialog').close();

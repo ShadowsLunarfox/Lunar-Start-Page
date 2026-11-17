@@ -188,6 +188,7 @@ void initialize();
 
 async function initialize() {
   initializeSharedState();
+  globalThis.lunarPrivacy?.initialize();
   document.documentElement.lang = normalizeLanguage(state.language || detectPreferredLanguage());
   renderPriorityBackgroundShell();
   const backgroundReady = initializeBackgroundStorage().then(
@@ -256,7 +257,7 @@ function bindEvents() {
   voiceSearchButtonEl.addEventListener("click", handleVoiceSearchToggle);
   searchAllEnginesButtonEl.addEventListener("click", handleMultiSuggestionsToggleClick);
   settingsSearchEngineEl.addEventListener("change", handleSettingsSearchEngineChange);
-  searchSuggestionsSettingEl.addEventListener("change", () => updateSetting("searchSuggestionsEnabled", searchSuggestionsSettingEl.value === "on"));
+  searchSuggestionsSettingEl.addEventListener("change", handleSearchSuggestionsSettingChange);
   searchSuggestionsAllEnginesSettingEl.addEventListener("change", handleAllEngineSuggestionsSettingChange);
   searchSuggestionEngineListEl.addEventListener("change", handleSearchSuggestionEngineListChange);
   languageSelectEl.addEventListener("change", handleLanguageChange);
@@ -1527,7 +1528,8 @@ function getChromiumMajorVersion() {
   return match ? Number(match[1]) : 0;
 }
 
-function handleMultiSuggestionsToggleClick() {
+async function handleMultiSuggestionsToggleClick() {
+  if (!await globalThis.lunarPrivacy?.request("suggestions")) return;
   state.settings = sanitizeSettings({
     ...state.settings,
     searchSuggestionsEnabled: true,

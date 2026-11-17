@@ -1,116 +1,131 @@
-// Localhost only, fresh headless profile. Never reads installed extension data.
+// Disposable localhost profile only. Optional data access must never block the homepage.
 (async () => {
-  const KEY = 'lunarLegalConsent:v1';
-  const results = [];
-  const frames = [];
-  const assert = (value, message) => { if (!value) throw new Error(message); };
+  const results = [], frames = [];
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  const assert = (value, message) => { if (!value) throw new Error(message); };
   const wait = async predicate => {
-    const until = Date.now() + 10000;
-    while (Date.now() < until) { if (predicate()) return; await delay(25); }
-    throw new Error('First-run check timed out');
+    for (let i=0;i<400;i++) { if (await predicate()) return; await delay(25); }
+    throw new Error('Feature privacy check timed out');
   };
-  const record = scenario => {
-    results.push({ scenario, passed: true });
-    const item = document.createElement('li'); item.textContent = `PASS: ${scenario}`; document.querySelector('ol').append(item);
+  const record = scenario => { results.push({scenario,passed:true}); const item=document.createElement('li'); item.textContent='PASS: '+scenario; document.querySelector('ol').append(item); };
+  const clear = () => { frames.splice(0).forEach(frame=>frame.remove()); localStorage.clear(); };
+  const open = async (version='modern') => {
+    const frame=document.createElement('iframe'); frame.style.cssText='width:390px;height:700px;border:0';
+    frame.src=version==='modern'?'../home.html':'../legacy/home.html'; frames.push(frame);document.body.append(frame);
+    await wait(()=>frame.contentDocument?.body?.classList.contains('app-ready'));
+    const win=frame.contentWindow, doc=frame.contentDocument;
+    await wait(()=>win.t('feature_privacy.title')!=='feature_privacy.title');
+    return {frame,win,doc};
   };
-  const open = async (version = 'modern', gate = true) => {
-    const frame = document.createElement('iframe');
-    frame.style.cssText = 'width:390px;height:700px;border:0';
-    frame.src = version === 'modern' ? '../home.html' : '../legacy/home.html';
-    frames.push(frame); document.body.append(frame);
-    await wait(() => gate ? frame.contentDocument?.querySelector('#legal-consent-checkbox:not(:disabled)') : frame.contentDocument?.body?.classList.contains('app-ready'));
-    return { frame, win: frame.contentWindow, doc: frame.contentDocument };
+  const modal = page => page.doc.getElementById('feature-privacy-dialog');
+  const answer = async (page, action) => {
+    await wait(()=>modal(page)?.open);
+    modal(page).querySelector(`[data-privacy-action="${action}"]`).click();
+    await wait(()=>!modal(page));
   };
-  const accept = context => { context.doc.querySelector('#legal-consent-checkbox').click(); context.doc.querySelector('#legal-consent-accept').click(); };
-  const clear = () => { frames.splice(0).forEach(frame => frame.remove()); localStorage.clear(); };
-  if (new URLSearchParams(location.search).has('preview')) {
-    clear();
-    const {frame,doc} = await open();
-    frame.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;border:0;opacity:1';
-    doc.body.dataset.theme = 'light';
-    return;
-  }
+  const resources = page => page.win.performance.getEntriesByType('resource').map(item=>new URL(item.name)).filter(url=>url.origin!==location.origin && /^https?:/.test(url.protocol));
   try {
     clear();
-    let context = await open();
-    let {win,doc} = context;
-    const dialog = doc.querySelector('dialog#legal-consent-dialog');
-    assert(dialog.matches(':modal'), 'Agreement must be a modal dialog');
-    assert(!doc.querySelector('#legal-consent-checkbox').checked && doc.querySelector('#legal-consent-accept').disabled, 'Agreement was preselected');
-    assert(!win.performance.getEntriesByType('resource').some(entry => /\/08-app\.js/.test(entry.name)), 'Homepage initialized before agreement');
-    assert(!win.lunarMediaPlayer && !localStorage.getItem(KEY), 'First run enabled media or persisted agreement');
-    doc.querySelector('form#legal-consent-form').dispatchEvent(new win.Event('submit', {cancelable:true}));
-    const cancel = new win.Event('cancel', {cancelable:true}); dialog.dispatchEvent(cancel);
-    assert(cancel.defaultPrevented && dialog.open && !localStorage.getItem(KEY), 'Escape or unchecked submit bypassed agreement');
-    dialog.close(); await wait(() => dialog.open);
-    record('First launch blocks homepage initialization; unchecked submit, Escape and dialog close cannot bypass it');
+    // An old accepted terms record must not grant any feature permission.
+    localStorage.setItem('lunarLegalConsent:v1',JSON.stringify({termsVersion:'2026-10-31',privacyVersion:'2026-11-01-media-v2',acceptedAt:new Date().toISOString()}));
+    let page=await open();
+    assert(!page.doc.querySelector('dialog[open]')&&!page.win.lunarLegalConsent,'First visit is still blocked by an agreement');
+    assert(page.doc.querySelector('.search-data-notice').textContent.includes('query'),'Search transmission is not disclosed');
+    await delay(250);
+    assert(!resources(page).length,'Homepage requested an external resource before any feature agreement');
+    assert(!page.doc.querySelector('.shortcut-icon img[src^="https:"]'),'Saved shortcut icons leaked before consent');
+    assert(!page.win.lunarPrivacy.has('suggestions')&&!page.win.lunarPrivacy.has('resources'),'Old terms agreement granted feature access');
+    record('First visit opens immediately, shows the search notice, and makes no automatic external requests or blanket consent migration');
 
+    if (new URLSearchParams(location.search).has('preview')) {
+      page.frame.style.cssText='position:fixed;inset:0;width:100%;height:100%;border:0;opacity:1';
+      void page.win.lunarPrivacy.request('suggestions'); return;
+    }
+
+    for (const version of ['modern','legacy']) {
+      clear(); page=await open(version);
+      let fetches=0;const realFetch=page.win.fetch;
+      page.win.fetch=(url,options)=>{
+        if (/^https?:/.test(String(url))) {fetches++;return Promise.resolve({ok:true,json:async()=>['typed query',['network suggestion']]});}
+        return realFetch.call(page.win,url,options);
+      };
+      assert((await page.win.fetchRemoteSearchSuggestions('private draft')).length===0&&fetches===0,'Remote suggestions ran without consent');
+      const select=page.doc.getElementById('search-suggestions-setting');
+      select.value='on';select.dispatchEvent(new page.win.Event('change'));
+      await answer(page,'cancel');
+      assert(select.value==='off'&&!page.win.lunarPrivacy.has('suggestions')&&fetches===0,'Cancel enabled online suggestions');
+      select.value='on';select.dispatchEvent(new page.win.Event('change'));await answer(page,'agree');
+      assert((await page.win.fetchRemoteSearchSuggestions('typed query')).length>0&&fetches>0,'Explicit agreement did not enable suggestions');
+      const before=fetches;
+      page.win.lunarPrivacy.revoke('suggestions');
+      assert((await page.win.fetchRemoteSearchSuggestions('another private draft')).length===0&&fetches===before,'Revocation did not stop requests');
+      const imported=page.win.sanitizeSettings({searchSuggestionsEnabled:true});
+      assert(imported.searchSuggestionsEnabled===false,'Imported settings bypassed feature consent');
+    }
+    record('Both interfaces keep suggestions off until explicit agreement; cancel, revocation and imported settings cannot bypass it');
+
+    clear();page=await open();
+    const peer=await open('legacy');
+    let pending=page.win.lunarPrivacy.request('resources');await answer(page,'agree');assert(await pending,'Resources were not enabled');
+    await wait(()=>peer.win.lunarPrivacy.has('resources'));
+    assert(page.doc.querySelector('.shortcut-icon img[src^="https:"]'),'Consented online icons were not rendered');
+    peer.win.lunarPrivacy.revoke('resources');
+    await wait(()=>!page.win.lunarPrivacy.has('resources')&&!page.doc.querySelector('.shortcut-icon img[src^="https:"]'));
+    assert(!page.win.lunarPrivacy.allowsUrl('https://example.com/imported-wallpaper.jpg'),'External wallpaper bypassed the resource choice');
+    assert(page.win.lunarPrivacy.allowsUrl('data:image/png;base64,AAAA')&&page.win.lunarPrivacy.allowsUrl('resource/icons/lunar-v2-32.png'),'Local images require online permission');
+    record('Resource choices synchronize across interfaces; revocation removes online icons and blocks external wallpapers while local assets stay available');
+
+    clear();page=await open();
+    const originalSet=page.win.Storage.prototype.setItem;
+    page.win.Storage.prototype.setItem=function(key,value){if(key.startsWith('lunarFeatureConsent:'))throw new Error('Storage unavailable');return originalSet.call(this,key,value);};
+    pending=page.win.lunarPrivacy.request('suggestions');
+    await wait(()=>modal(page)?.open);modal(page).querySelector('[data-privacy-action="agree"]').click();
+    assert(modal(page).open&&!modal(page).querySelector('[role="alert"]').hidden&&!page.win.lunarPrivacy.has('suggestions'),'Failed persistence granted access');
+    await answer(page,'cancel');assert(!await pending,'Cancel after a storage failure granted access');
+    page.win.Storage.prototype.setItem=originalSet;
+    record('A storage failure keeps the optional feature off and allows canceling back to the usable homepage');
+
+    for(const version of ['modern','legacy']) {
+      clear();page=await open(version);
+      let starts=0,uploads=0;
+      page.win.SpeechRecognition=class {addEventListener(){}start(){starts++;}stop(){}};
+      const voice=page.win.handleVoiceSearchToggle();await answer(page,'cancel');await voice;
+      assert(starts===0,'Microphone started before agreement');
+      const nextVoice=page.win.handleVoiceSearchToggle();await answer(page,'agree');await nextVoice;
+      assert(starts===1,'Microphone did not start after agreement');
+      const realSearch=page.win.submitSearchQuery;let submitted=0;
+      page.win.submitSearchQuery=()=>{submitted++;};
+      page.win.lunarPrivacy.revoke('voice');
+      page.win.handleVoiceSearchResult({resultIndex:0,results:[{isFinal:true,0:{transcript:'late recognition result'}}]});
+      assert(submitted===0,'A late recognition result searched after voice consent was revoked');
+      page.win.submitSearchQuery=realSearch;
+      const realSubmit=page.win.HTMLFormElement.prototype.submit;
+      page.win.HTMLFormElement.prototype.submit=function(){uploads++;};
+      const file=new page.win.File(['fixture'],'fixture.png',{type:'image/png'});
+      let image=page.win.submitGoogleImageSearchFile(file);await answer(page,'cancel');await image;
+      assert(uploads===0,'Image uploaded before agreement');
+      image=page.win.submitGoogleImageSearchFile(file);await answer(page,'agree');await image;
+      assert(uploads===1,'Image did not upload after agreement');
+      page.win.HTMLFormElement.prototype.submit=realSubmit;
+    }
+    record('Voice recognition and image upload start only after their own data-use notice is accepted in either interface');
+
+    clear();page=await open();
     for(const language of ['en','zh-CN','yue','ja','ko','th','ms']) {
-      const locale = await (await fetch(`../data/language/${language}.json`)).json();
-      const select = doc.querySelector('#legal-consent-language'); select.value = language; select.dispatchEvent(new win.Event('change'));
-      await wait(() => !doc.querySelector('#legal-consent-checkbox').disabled);
-      assert(doc.querySelector('#legal-consent-title').textContent === locale.legal.consent.title, `Missing ${language} agreement translation`);
-      for(const link of dialog.querySelectorAll('[data-legal-document]')) {
-        const kind = link.dataset.legalDocument === 'privacy' ? 'PRIVACY' : 'TERMS';
-        const path = language === 'en' ? `${kind}.md` : `docs/legal/${kind}.${language}.md`;
-        assert(link.href === `https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/${path}`, 'Wrong online legal language');
-      }
-      assert(!doc.querySelector('#legal-consent-checkbox').checked, 'Language change retained agreement');
+      // Exercise every bundled disclosure even for languages not exposed in the main selector.
+      const locale=await(await fetch(`../data/language/${language}.json`)).json();
+      page.win.eval('translations='+JSON.stringify(locale));
+      page.win.lunarPrivacy.localize();
+      assert(page.doc.querySelector('[data-privacy-text="title"]').textContent===locale.feature_privacy.title,'Disclosure language missing: '+language);
+      pending=page.win.lunarPrivacy.request('suggestions');
+      await wait(()=>modal(page)?.open);
+      assert(modal(page).querySelector('h2').textContent===locale.feature_privacy.suggestions_title,'Wrong modal language: '+language);
+      assert(modal(page).scrollWidth<=modal(page).clientWidth+1,'Mobile disclosure overflows: '+language);
+      await answer(page,'cancel');await pending;
     }
-    record('All seven dialog languages link to the corresponding online Markdown documents');
-
-    for(const theme of ['light','dark']) {
-      doc.body.dataset.theme = theme;
-      const style = win.getComputedStyle(dialog);
-      assert(style.color !== style.backgroundColor, 'Agreement text disappeared into the theme');
-      assert(dialog.getBoundingClientRect().width <= 390 && dialog.scrollWidth <= dialog.clientWidth + 1, 'Mobile agreement overflows horizontally');
-    }
-    record('Light and dark themes keep the mobile agreement readable without horizontal overflow');
-
-    accept(context);
-    await wait(() => doc.body.classList.contains('app-ready'));
-    const agreement = JSON.parse(localStorage.getItem(KEY));
-    assert(agreement.termsVersion && agreement.privacyVersion && Date.parse(agreement.acceptedAt), 'Agreement revision or timestamp was not recorded');
-    assert(!doc.querySelector('#legal-consent-dialog'), 'Accepted agreement stayed open');
-    record('Explicit agreement records revisions and timestamp locally, then starts the homepage');
-
-    context.frame.remove();
-    context = await open('modern', false);
-    assert(!context.doc.querySelector('#legal-consent-dialog'), 'Returning user saw the dialog again');
-    context.frame.remove();
-    context = await open('legacy', false);
-    assert(!context.doc.querySelector('#legal-consent-dialog'), 'Legacy mode did not share the agreement');
-    record('Returning visits and switching to legacy mode reuse the same agreement');
-
-    clear();
-    localStorage.setItem(KEY, JSON.stringify({...agreement,termsVersion:'outdated'}));
-    context = await open('legacy');
-    assert(context.doc.querySelector('#legal-consent-dialog').open, 'Outdated agreement bypassed the gate');
-    const peer = await open();
-    accept(context);
-    await wait(() => context.doc.body.classList.contains('app-ready') && peer.doc.body.classList.contains('app-ready'));
-    record('An outdated revision prompts again; accepting in one interface unlocks waiting tabs in both');
-
-    clear();
-    localStorage.setItem(KEY, '{malformed');
-    context = await open();
-    const originalSet = context.win.Storage.prototype.setItem;
-    context.win.Storage.prototype.setItem = function(key,value) { if(key === KEY) throw new Error('Fixture: storage full'); return originalSet.call(this,key,value); };
-    accept(context);
-    assert(!context.doc.querySelector('#legal-consent-error').hidden && context.doc.querySelector('#legal-consent-dialog').open, 'Failed persistence bypassed agreement');
-    assert(!context.doc.body.classList.contains('app-ready'), 'Homepage started after persistence failed');
-    context.win.Storage.prototype.setItem = originalSet;
-    context.doc.querySelector('#legal-consent-accept').click();
-    await wait(() => context.doc.body.classList.contains('app-ready'));
-    record('Malformed records prompt again; storage failure keeps the gate open and can be retried');
-
-    clear(); context = await open();
-    context.doc.querySelector('#legal-consent-decline').click();
-    await wait(() => context.frame.contentWindow.location.href === 'about:blank');
-    assert(!localStorage.getItem(KEY), 'Declining recorded acceptance');
-    record('Declining leaves the homepage without recording acceptance');
-  } catch(error) { results.push({ scenario:error.stack || error.message, passed:false }); }
-  finally { clear(); }
-  await fetch('/__viewport-report', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passed:results.filter(result=>result.passed).length,total:results.length,results})});
+    assert(page.doc.querySelector('[data-legal-document="privacy"]')&&page.doc.querySelector('[data-legal-document="terms"]'),'Settings lost legal document links');
+    record('All seven languages provide feature-specific notices without mobile horizontal overflow; legal document links remain in settings');
+  } catch(error) { results.push({scenario:error.stack||error.message,passed:false}); }
+  finally { if(!new URLSearchParams(location.search).has('preview'))clear(); }
+  await fetch('/__viewport-report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passed:results.filter(item=>item.passed).length,total:results.length,results})});
 })();

@@ -1,6 +1,6 @@
 # Dasar Privasi Lunar Start Page
 
-Status: draf umum, belum berkuat kuasa sebagai dasar keluaran awam. Dikemas kini: 2026-11-01. Penerbit akan mengumumkan tarikh kuat kuasa semasa penerbitan.
+Status: draf umum, belum berkuat kuasa sebagai dasar keluaran awam. Dikemas kini: 2026-11-17. Penerbit akan mengumumkan tarikh kuat kuasa semasa penerbitan.
 
 Bahasa: [English](../../PRIVACY.md) · [简体中文](PRIVACY.zh-CN.md) · [繁體粵語](PRIVACY.yue.md) · [日本語](PRIVACY.ja.md) · [한국어](PRIVACY.ko.md) · [ไทย](PRIVACY.th.md) · [Bahasa Melayu](PRIVACY.ms.md)
 
@@ -48,6 +48,8 @@ Pintasan, tetapan dan kertas dinding kekal sehingga diubah atau storannya dibuan
 Perkhidmatan rangkaian terbina dalam menggunakan HTTPS; pautan/sumber sendiri bergantung pada destinasi. Sambungan tidak mengenkripsi pintasan setempat atau sandaran eksport secara berasingan. Lindungi peranti, profil dan sandaran anda. Keselamatan mutlak tidak dapat dijamin.
 
 ## 7. Pilihan dan hak
+
+Halaman utama dibuka tanpa skrin persetujuan terma pada penggunaan pertama. Tetapan → Carian → Penggunaan data dan ciri pilihan menyediakan pilihan berasingan untuk cadangan carian dalam talian serta ikon, fon dan imej luaran; ciri ini dimatikan sehingga diaktifkan secara berasingan. Carian suara dan imej memaparkan notis penggunaan data masing-masing sebelum penggunaan pertama. Media Windows mengekalkan pendedahan dan kebenaran pelayar yang berasingan. Menolak atau menarik balik pilihan tidak menyekat halaman utama. Pilihan disimpan dalam profil pelayar ini sahaja dan tidak dimasukkan dalam sandaran halaman utama.
 
 Anda boleh mengedit/memadam item, mengurus sejarah carian, mematikan cadangan, menarik balik kebenaran dan mengeksport data. Pembersihan cache prestasi bukan pemadaman semua data. Untuk pembuangan lengkap, nyahpasang sambungan, kosongkan data setempat melalui pelayar dan padam sandaran sendiri.
 

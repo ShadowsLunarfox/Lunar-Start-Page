@@ -22,9 +22,10 @@ function renderCollection() {
     card.classList.toggle("is-pinned", Boolean(link.pinned));
     mainLink.href = normalizeUrl(link.url);
     mainLink.target = typeof getHomepageNavigationTarget === "function" && getHomepageNavigationTarget() !== window ? "_parent" : "_self";
+    const iconSource = canLoadResource(link.icon || faviconForUrl(link.url)) ? (link.icon || faviconForUrl(link.url)) : "";
     mainLink.innerHTML = `
-      <span class="shortcut-icon" aria-hidden="true">
-        <img src="${escapeAttribute(link.icon || faviconForUrl(link.url))}" alt="">
+      <span class="shortcut-icon${iconSource ? "" : " is-fallback"}" aria-hidden="true">
+        <img ${iconSource ? `src="${escapeAttribute(iconSource)}"` : ""} alt="">
         <span class="shortcut-fallback">${escapeHtml((link.name[0] || "?").toUpperCase())}</span>
       </span>
       <div class="shortcut-text">

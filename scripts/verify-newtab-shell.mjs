@@ -37,8 +37,6 @@ try{
  await wait(()=>evaluate("Boolean(document.getElementById('lunar-start-frame'))"));
  const shellUrl=await evaluate('location.href');
  if(!shellUrl.endsWith('/newtab.html'))throw new Error('Browser did not retain the New Tab entry: '+shellUrl);
- await wait(()=>evaluate("Boolean(document.querySelector('#legal-consent-checkbox:not(:disabled)'))",true));
- await evaluate("document.querySelector('#legal-consent-checkbox').click();document.querySelector('#legal-consent-accept').click()",true);
  await wait(()=>evaluate("document.body.classList.contains('app-ready')",true));
  await evaluate("document.querySelector('[data-browser-theme]').click()",true);
  await wait(async()=>{

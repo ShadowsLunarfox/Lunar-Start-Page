@@ -114,6 +114,7 @@ function applyTranslations() {
   }
   globalThis.lunarFonts?.localize();
   globalThis.lunarGoogleApps?.localize();
+  globalThis.lunarPrivacy?.localize();
   syncLegalDocumentLinks();
 }
 

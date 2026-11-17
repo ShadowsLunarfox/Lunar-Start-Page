@@ -31,6 +31,5 @@
     });
   }
 
-  // Fail closed if the consent module cannot load; a reload can retry it.
-  if (window.lunarLegalConsent) window.lunarLegalConsent.ready.then(loadScripts);
+  loadScripts();
 }());

@@ -80,32 +80,32 @@ const SEARCH_ENGINE_CATEGORY_ORDER = ["mainstream", "niche", "caution"];
 
 const PRESETS = {
   wallpaper_1: {
-    path: "themes/wallpaper/wallpaperflare.com_wallpaper (1).jpg",
-    label: "Wallpaper 1",
+    path: "themes/wallpaper/blue-marble.jpg",
+    label: "NASA · Blue Marble",
     mediaType: "image"
   },
   wallpaper_2: {
-    path: "themes/wallpaper/wallpaperflare.com_wallpaper (2).jpg",
-    label: "Wallpaper 2",
+    path: "themes/wallpaper/lunar-earthset.jpg",
+    label: "NASA · Lunar Earthset",
     mediaType: "image"
   },
   wallpaper_3: {
-    path: "themes/wallpaper/wallpaperflare.com_wallpaper.jpg",
-    label: "Wallpaper 3",
+    path: "themes/wallpaper/cosmic-cliffs.jpg",
+    label: "NASA · Cosmic Cliffs",
     mediaType: "image"
   },
   komainu_desktop: {
-    path: "themes/wallpaper/Mp4/Komainu_Desktop.mp4",
-    label: "Komainu Desktop",
+    path: "themes/wallpaper/Mp4/earthset-loop.mp4",
+    label: "NASA · Earthset Loop",
     mediaType: "video"
   }
 };
 
 const PRESET_LABELS = {
-  wallpaper_1: "Wallpaper 1",
-  wallpaper_2: "Wallpaper 2",
-  wallpaper_3: "Wallpaper 3",
-  komainu_desktop: "Komainu Desktop"
+  wallpaper_1: "NASA · Blue Marble",
+  wallpaper_2: "NASA · Lunar Earthset",
+  wallpaper_3: "NASA · Cosmic Cliffs",
+  komainu_desktop: "NASA · Earthset Loop"
 };
 
 const THEME_TEXT_DEFAULTS = {
@@ -154,7 +154,7 @@ const DEFAULT_SETTINGS = {
   fontScale: 100,
   radius: 24,
   panelBlur: 22,
-  searchSuggestionsEnabled: true,
+  searchSuggestionsEnabled: false,
   searchSuggestionsAllEnginesEnabled: false,
   searchSuggestionEngineKeys: ["google", "bing", "baidu"],
   searchUiVisible: true,

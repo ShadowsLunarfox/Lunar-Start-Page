@@ -14,7 +14,7 @@ for(const kind of ['PRIVACY','TERMS'])for(const language of languages) {
   const name=path.join(root,relative),text=readFileSync(name,'utf8');
   assert(text.startsWith('# ')&&text.length>1800,`Incomplete document: ${relative}`);
   assert.equal((text.match(/^## \d+\./gm)||[]).length,kind==='PRIVACY'?8:9,`Missing translated sections: ${relative}`);
-  assert(text.includes(kind==='PRIVACY'?'2026-11-01':'2026-10-31')&&text.includes('ShadowsLunarfox'));
+  assert(text.includes(kind==='PRIVACY'?'2026-11-17':'2026-10-31')&&text.includes('ShadowsLunarfox'));
   assert(!text.includes('\ufffd')&&!/<\/?[a-z][^>]*>/i.test(text),`Legal document contains invalid text or HTML: ${relative}`);
   for(const[,target]of text.matchAll(/\]\(([^)]+)\)/g)) {
     if(/^https:\/\//.test(target))continue;
@@ -46,7 +46,13 @@ for(const version of ['modern','legacy']) {
 for(const prefix of ['', 'legacy/'])for(const language of languages) {
   const locale=JSON.parse(readFileSync(path.join(root,`${prefix}data/language/${language}.json`),'utf8'));
   assert(locale.legal.privacy&&locale.legal.terms,`Missing legal labels: ${prefix}${language}`);
+  for (const key of ['title','local','search_note','suggestions_title','suggestions_body','resources_title','resources_body','voice_title','voice_body','image_title','image_body','enable','disable','cancel','storage_error']) {
+    const value = locale.feature_privacy[key];
+    assert(typeof value === 'string' && value.length > 0 && !/\?{3,}|\ufffd/.test(value), `Invalid feature disclosure: ${prefix}${language}.${key}`);
+  }
 }
+const manifest=JSON.parse(readFileSync(path.join(root,'manifest.json'),'utf8'));
+assert(!manifest.optional_permissions.includes('management') && !manifest.permissions.includes('management'), 'The homepage must not request extension-management access');
 const storeConfig=JSON.parse(readFileSync(path.join(root,'release/store-config.json'),'utf8'));
 assert.equal(storeConfig.privacyPolicyUrl,'https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/PRIVACY.md');
 assert.equal(storeConfig.termsOfServiceUrl,'https://github.com/ShadowsLunarfox/Lunar-Start-Page/blob/main/TERMS.md');

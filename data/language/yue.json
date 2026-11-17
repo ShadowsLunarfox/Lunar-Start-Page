@@ -327,7 +327,11 @@
     "deepsea": "深海",
     "ember": "餘燼",
     "moss": "青苔",
-    "dusk": "黃昏"
+    "dusk": "黃昏",
+    "wallpaper_1": "NASA · 藍色地球",
+    "wallpaper_2": "NASA · 月面地落",
+    "wallpaper_3": "NASA · 宇宙懸崖",
+    "komainu_desktop": "NASA · 地落循環"
   },
   "background": {
     "current_custom_image": "而家背景：自訂圖片",
@@ -410,17 +414,7 @@
   },
   "legal": {
     "privacy": "私隱政策",
-    "terms": "服務條款",
-    "consent": {
-      "title": "開始使用之前",
-      "intro": "使用 Lunar Start Page 之前，請先閱讀服務條款同私隱政策。",
-      "language": "語言",
-      "agreement": "我同意服務條款，並已知悉私隱政策。",
-      "note": "接受紀錄只會儲存喺目前嘅瀏覽器設定檔。可選嘅 Windows 媒體存取仍然需要另外授權。",
-      "accept": "接受並繼續",
-      "decline": "拒絕並離開",
-      "storage_error": "無法儲存接受紀錄。請釋放瀏覽器儲存空間或允許本機儲存，然後再試。"
-    }
+    "terms": "服務條款"
   },
   "connector": {
     "page_title": "Windows 媒體連接器 — Lunar Start Page",
@@ -493,5 +487,22 @@
       "contacts": "聯絡人",
       "keep": "Keep"
     }
+  },
+  "feature_privacy": {
+    "title": "資料使用與可選功能",
+    "local": "收藏、設定、桌布同搜尋記錄會儲存喺目前瀏覽器設定檔。備份只會喺你匯出或分享之後離開本機。以下連線功能可以獨立選擇，亦可以隨時喺呢度關閉。",
+    "search_note": "搜尋時會將搜尋字詞傳送畀所選引擎，並喺本機儲存搜尋記錄。",
+    "suggestions_title": "網上搜尋建議",
+    "suggestions_body": "輸入時，搜尋字詞會傳送畀所選建議服務同備用服務（可能包括 Google 或 DuckDuckGo）。多引擎模式會傳送畀每個已勾選服務。服務會收到你嘅 IP 位址同一般請求資料。喺呢度或者「搜尋建議」關閉之後，就會停止呢啲請求。",
+    "resources_title": "網上圖示、字體同圖片",
+    "resources_body": "載入網上收藏圖示會將收藏網站嘅網域名稱傳送畀 Google 圖示服務。自訂圖示或者桌布網址會連線到對應伺服器，舊版卡通字體會連線到 Google Fonts。服務會收到你嘅 IP 位址同一般請求資料。功能預設關閉，內置同本機上載嘅資源仍然可以用。",
+    "voice_title": "語音搜尋",
+    "voice_body": "啟動語音搜尋並允許咪高峰之後，瀏覽器嘅語音辨識服務可能會處理你嘅音訊。辨識完成後，文字會自動提交畀所選搜尋引擎，並儲存喺本機搜尋記錄。擴充功能唔會保留錄音。可以撳咪高峰按鈕停止錄音，或者喺瀏覽器撤銷咪高峰權限。",
+    "image_title": "圖片搜尋",
+    "image_body": "喺圖片搜尋揀選或者拖入圖片之後，檔案會上載畀 Google Lens 尋找相似圖片。Google 會收到圖片同一般請求資料。取消呢個說明唔會傳送圖片，擴充功能唔會保留上載嘅圖片。",
+    "enable": "同意並啟用",
+    "disable": "關閉",
+    "cancel": "取消",
+    "storage_error": "無法儲存呢個選擇。請允許本機儲存或者釋放空間之後再試。"
   }
 }

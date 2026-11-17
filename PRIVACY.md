@@ -1,6 +1,6 @@
 # Lunar Start Page Privacy Policy
 
-Status: general draft, not yet effective as a public-release policy. Last updated: 2026-11-01. The publisher will announce an effective date when publishing.
+Status: general draft, not yet effective as a public-release policy. Last updated: 2026-11-17. The publisher will announce an effective date when publishing.
 
 Languages: [English](PRIVACY.md) · [简体中文](docs/legal/PRIVACY.zh-CN.md) · [繁體粵語](docs/legal/PRIVACY.yue.md) · [日本語](docs/legal/PRIVACY.ja.md) · [한국어](docs/legal/PRIVACY.ko.md) · [ไทย](docs/legal/PRIVACY.th.md) · [Bahasa Melayu](docs/legal/PRIVACY.ms.md)
 
@@ -48,6 +48,8 @@ Local shortcuts, settings and wallpapers remain until changed or their storage i
 Built-in network services use HTTPS; user-supplied links/resources depend on their destinations. The extension does not separately encrypt local shortcuts or exported backups. Protect your device, browser profile and backup files. No software or third-party service can promise absolute security.
 
 ## 7. Choices and rights
+
+The homepage opens without a first-run terms gate. Settings → Search → Data use & optional features provides separate choices for online suggestions and external icons, fonts and images; these stay off until explicitly enabled after their disclosure. Voice and image search show their own data-use notice before first use. Windows media retains its separate disclosure and browser permission. Declining or revoking an optional choice leaves the homepage usable. Feature choices are stored only in the current browser profile and are not included in homepage backups.
 
 You can edit/delete homepage items, manage local search history, turn suggestions off, revoke optional permissions and export data. Performance-cache cleanup does not erase all user data. For complete removal, uninstall the extension, clear its local data using browser facilities, and remove your own exported backups.
 
