@@ -14,6 +14,7 @@
   <p>
     <a href="#-installation">Get started</a> ·
     <a href="#-features">Explore features</a> ·
+    <a href="#screenshots">Screenshots</a> ·
     <a href="https://github.com/ShadowsLunarfox/Lunar-Start-Page">View repository</a>
   </p>
 </div>
@@ -45,6 +46,25 @@ Updates preserve saved bookmarks, custom uploads and theme choices.
 | 🌏 **Multiple languages** | Use Lunar Start Page in a range of supported languages. |
 | 🖱️ **Quick save** | Right-click a webpage and save it to your Lunar Start shortcuts. |
 | 🧰 **Backup & diagnostics** | Use the built-in tools to back up or restore data and check browser compatibility. |
+
+## Screenshots
+
+| Pawprint Sky · Light mode | Rainy Woodland · Dark mode |
+| --- | --- |
+| [![Light mode with the Pawprint Sky wallpaper and shortcuts](resource/icons/thumbnail/01-pawprint-sky.png)](resource/icons/thumbnail/01-pawprint-sky.png) | [![Dark mode with the Rainy Woodland wallpaper, analog clock, and list shortcuts](resource/icons/thumbnail/02-rainy-woodland.png)](resource/icons/thumbnail/02-rainy-woodland.png) |
+
+| Wallpaper settings | Layout editor |
+| --- | --- |
+| [![Wallpaper settings showing five static wallpapers and one live wallpaper](resource/icons/thumbnail/03-wallpaper-settings.png)](resource/icons/thumbnail/03-wallpaper-settings.png) | [![Layout editor showing draggable and resizable panels over the Moonlit Paws wallpaper](resource/icons/thumbnail/04-layout-editor.png)](resource/icons/thumbnail/04-layout-editor.png) |
+
+<details>
+<summary>Chrome Web Store promo tiles</summary>
+
+![Small promo tile with Lunar Start Page branding and a fox reading in a woodland cabin](resource/icons/thumbnail/small-promo-440x280.png)
+
+![Marquee promo tile for Lunar Start Page](resource/icons/thumbnail/marquee-promo-1400x560.png)
+
+</details>
 
 ## 🚀 Installation
 
