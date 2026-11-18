@@ -1,0 +1,18 @@
+{
+  "created": "2026-11-19",
+  "tool": "OpenAI built-in imagegen",
+  "assets": [
+    {
+      "key": "furry-paw-day",
+      "prompt": "Use case: illustration-story. Asset: original all-ages furry-community browser wallpaper, wide 16:9 landscape, 1920x1080 composition. Fresh cute pastel furry illustration, sophisticated soft cel shading, tidy expressive character design, very soft paper texture. A fluffy cream-and-apricot anthropomorphic fox with huge pointed ears, a small mint neckerchief and a casual oversize cream hoodie, sits on a little grassy knoll at the far right edge, waving one paw, large fluffy curved tail. Open pale sky-blue and mint meadow, soft cloud shapes and a few small subtle floating paw-pad motifs near outer edges, tiny daisies at bottom corners. Restrained warm-white, mint, pale sky blue, apricot. Center and left 70 percent must be calm spacious sky and gentle gradients to leave room for browser search, clock, and bookmarks. Cheerful airy atmosphere, full character inside frame. No UI, no text, no lettering, no logos, no watermark, no additional characters. One landscape wallpaper, no collage, opaque background."
+    },
+    {
+      "key": "furry-paw-moon",
+      "prompt": "Use case: illustration-story. Asset: original all-ages furry community browser wallpaper, wide 16:9 landscape composition 1920x1080. Fresh cute pastel furry illustration with polished soft cel shading and subtle paper grain. A fluffy pale gray anthropomorphic wolf with lavender accents on ears and tail, wearing a simple cozy mint sweater, sits on a fluffy cloud at the far right quarter, holding a small crescent-shaped cushion and gazing peacefully out across the sky. Soft periwinkle, lavender and muted teal night sky, tiny star dots concentrated near frame edges, very subtle paw-pad constellation motif at top left corner. Quiet and friendly mood, no busy detail in the central 70 percent: leave generous calm gradient sky for translucent search and bookmark UI. Spacious complete landscape, character fully inside frame. No UI, no text, no lettering, no logos, no watermark, no extra characters, no collage. Opaque background."
+    },
+    {
+      "key": "furry-paw-studio",
+      "prompt": "Use case: illustration-story. Asset: original all-ages furry community browser new-tab wallpaper, landscape 16:9 composition 1920x1080. Fresh cute pastel furry illustration, refined soft cel shading and subtle paper texture, clean shapes. A cheerful fluffy cream-and-caramel anthropomorphic cat with a small mint apron is seated sketching at a rounded light-wood drawing desk located in the far right quarter; cute rounded ears and a thick fluffy tail, coherent anatomy. Airy mint-and-peach creative studio, a small potted plant and a tiny paw-shaped cushion near the right corner. A large softly lit pale mint wall and diffuse window sunlight fill the center and left 70 percent with calm spacious gradients, suitable for browser clock, search and bookmark overlays. Subtle pale paw motifs near outer bottom left edge. Cream, pale mint, soft apricot highlights. No UI, no words, no lettering, no logos, no watermark, no extra characters. Single full landscape image, no collage, opaque background."
+    }
+  ]
+}

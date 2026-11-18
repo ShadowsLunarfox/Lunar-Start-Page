@@ -25,7 +25,7 @@ function renderCollection() {
     mainLink.href = normalizeUrl(link.url);
     mainLink.target = typeof getHomepageNavigationTarget === "function" && getHomepageNavigationTarget() !== window ? "_parent" : "_self";
     mainLink.title = link.name;
-    const iconSource = canLoadResource(link.icon || faviconForUrl(link.url)) ? (link.icon || faviconForUrl(link.url)) : "";
+    const iconSource = link.icon || faviconForUrl(link.url);
     mainLink.innerHTML = `
       <span class="shortcut-icon${iconSource ? "" : " is-fallback"}" aria-hidden="true">
         <img ${iconSource ? `src="${escapeAttribute(iconSource)}"` : ""} alt="">

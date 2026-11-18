@@ -2390,3 +2390,9 @@ input[type="range"]::-moz-range-thumb {
     flex-wrap: wrap;
   }
 }
+
+/* Keep the furry characters in view when a landscape preset fills a portrait window. */
+@media (max-aspect-ratio: 4/5) {
+  body.has-preset-wallpaper .background-layer { background-position: right center; }
+  body.has-preset-wallpaper .background-video { object-position: right center; }
+}

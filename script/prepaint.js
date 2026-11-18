@@ -4,10 +4,12 @@
   var STORAGE_KEY = "customHomeState";
   var CHROME_BACKGROUND_VALUE = "__chrome_storage_background__";
   var PRESET_WALLPAPERS = {
-    wallpaper_1: { path: "themes/wallpaper/blue-marble.jpg", mediaType: "image" },
-    wallpaper_2: { path: "themes/wallpaper/lunar-earthset.jpg", mediaType: "image" },
-    wallpaper_3: { path: "themes/wallpaper/cosmic-cliffs.jpg", mediaType: "image" },
-    komainu_desktop: { path: "themes/wallpaper/Mp4/earthset-loop.mp4", mediaType: "video" }
+    wallpaper_1: { path: "themes/wallpaper/furry-paw-day.webp", mediaType: "image" },
+    wallpaper_2: { path: "themes/wallpaper/furry-paw-moon.webp", mediaType: "image" },
+    wallpaper_3: { path: "themes/wallpaper/furry-paw-studio.webp", mediaType: "image" },
+    rainy_library: { path: "themes/wallpaper/furry-rainy-library.webp", mediaType: "image" },
+    lakeside_tea: { path: "themes/wallpaper/furry-lakeside-tea.webp", mediaType: "image" },
+    komainu_desktop: { path: "themes/wallpaper/Mp4/furry-paw-breeze.mp4", mediaType: "video" }
   };
   var DEFAULTS = {
     theme: "dark",
@@ -40,9 +42,9 @@
   function readState() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) || {} : {};
+      return raw ? JSON.parse(raw) || {} : { background: { type: "preset", value: "wallpaper_1", selectedByUser: true } };
     } catch (error) {
-      return {};
+      return { background: { type: "preset", value: "wallpaper_1", selectedByUser: true } };
     }
   }
 
@@ -124,7 +126,6 @@
 
   function applyWallpaper(background, body, root) {
     var value = background && background.value;
-    if (value && /^(?:https?:)?\/\//i.test(value) && !window.lunarPrivacy?.allowsUrl(value)) return;
     var type = background && background.type;
     var mediaType = background && background.mediaType;
 
@@ -138,7 +139,6 @@
     }
 
     if (type === "preset" && PRESET_WALLPAPERS[value]) {
-      if (value === "wallpaper_1" && background.selectedByUser !== true) return;
       var preset = PRESET_WALLPAPERS[value];
       if (preset.mediaType === "image") {
         setInitialWallpaper(preset.path, body, root, value);

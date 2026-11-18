@@ -51,7 +51,7 @@ Current media and hardware readings are cached only as the latest state in brows
 6. Switch to legacy mode: it loads no player code or native bridge. Verify saved bookmarks and non-theme preferences still synchronize. Visit privacy policy from legacy settings.
 7. Reopen the manager, choose Uninstall, confirm removal, and verify the matching HKCU native-host registrations and owned files are removed. Its status becomes Not installed, and the same EXE can install again later. The installed Uninstall.cmd remains a fallback. Bookmarks and unrelated files remain. No startup tasks or network listeners should exist.
 
-Automated checks: `verify-ui.mjs`, `verify-quick-save.mjs`, `verify-shared-state.mjs`, `verify-interface-version.mjs`, `verify-media-broker.mjs`, and browser `check-browser-ui.mjs --player-only` / `--versions-only`. Native `verify-native-media.mjs --fixture` controls only an isolated no-audio test session.
+Run `verify-ui.mjs`, `verify-quick-save.mjs`, `verify-shared-state.mjs`, `verify-interface-version.mjs`, `verify-background-widgets.mjs`, and `check-browser-ui.mjs` with `--player-only` and `--versions-only`. Native `verify-native-media.mjs --fixture` controls only an isolated no-audio test session.
 
 Before submission, also confirm rights/licenses for all bundled wallpapers, video, fonts and icon artwork; verify screenshots, description, contact details and platform limitations. Technical preparation cannot certify third-party asset rights or guarantee review approval.
 

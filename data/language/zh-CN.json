@@ -204,7 +204,6 @@
     "url_placeholder": "https://example.com"
   },
   "settings": {
-    "developer_credit": "该插件开发者为 Lunarfox 月狐 · GitHub：",
     "repository_link": "项目仓库：",
     "title": "设定",
     "library": {
@@ -457,10 +456,12 @@
     "ember": "余烬",
     "moss": "苔绿",
     "dusk": "黄昏",
-    "wallpaper_1": "NASA · 蓝色地球",
-    "wallpaper_2": "NASA · 月面地落",
-    "wallpaper_3": "NASA · 宇宙悬崖",
-    "komainu_desktop": "NASA · 地落循环"
+    "wallpaper_1": "爪爪晴空",
+    "wallpaper_2": "月下爪印",
+    "wallpaper_3": "薄荷画室",
+    "rainy_library": "雨夜书屋",
+    "lakeside_tea": "湖畔茶憩",
+    "komainu_desktop": "爪爪微风 · 动态"
   },
   "background": {
     "current_custom_image": "当前背景：自定义图片",
@@ -515,10 +516,10 @@
   "workspace": {
     "start_page": "你的起始页",
     "customize": "个性化",
-    "eyebrow": "留一方空间，给自己",
-    "caption": "从此刻出发，让可能发生。",
-    "shortcuts": "常用网站",
-    "footer": "互联网里，属于你的安静一角。",
+    "eyebrow": "给每一只毛毛的小天地",
+    "caption": "循着爪印，发现同好与灵感。",
+    "shortcuts": "毛毛导航",
+    "footer": "让每次出发，都留下一点温柔的爪印。",
     "settings_subtitle": "每一个细节，都由你定义。",
     "personalize": "随心设置",
     "settings_categories": "设置分类",
@@ -673,22 +674,5 @@
       "contacts": "通讯录",
       "keep": "Keep"
     }
-  },
-  "feature_privacy": {
-    "title": "数据使用与可选功能",
-    "local": "收藏、设置、壁纸和搜索历史保存在当前浏览器配置中。备份仅在你导出或分享后离开本机。以下联网功能均可单独选择，并可随时在此关闭。",
-    "search_note": "搜索时会将搜索词发送给所选引擎，并在本机保存搜索历史。",
-    "suggestions_title": "在线搜索联想",
-    "suggestions_body": "输入时，搜索词会发送给所选联想服务及其备用服务（可能包括 Google 或 DuckDuckGo）。多引擎模式会发送给勾选的每个服务。这些服务会收到你的 IP 地址及常规请求信息。在此或“搜索联想”中关闭后，将停止这些请求。",
-    "resources_title": "在线图标、字体和图片",
-    "resources_body": "加载在线收藏图标会将已收藏网站的域名发送给 Google 图标服务。自定义图标或壁纸网址会联系对应服务器，旧版卡通字体会联系 Google Fonts。这些服务会收到你的 IP 地址及常规请求信息。此功能默认关闭；内置及本机上传的资源仍可使用。",
-    "voice_title": "语音搜索",
-    "voice_body": "启动语音搜索并允许麦克风后，浏览器的语音识别服务可能处理你的音频。识别完成后，文字会自动提交给所选搜索引擎，并保存到本机搜索历史。扩展不保存录音。可点击麦克风按钮停止录音，或在浏览器中撤销麦克风权限。",
-    "image_title": "图片搜索",
-    "image_body": "在图片搜索中选择或拖入图片后，该文件会上传给 Google Lens 查找相似图片。Google 会收到图片及常规请求信息。取消此说明不会发送图片，扩展不保留上传的图片。",
-    "enable": "同意并启用",
-    "disable": "关闭",
-    "cancel": "取消",
-    "storage_error": "无法保存此选择。请允许本地存储或释放空间后重试。"
   }
 }

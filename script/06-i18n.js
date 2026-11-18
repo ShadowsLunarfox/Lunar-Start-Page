@@ -115,7 +115,6 @@ function applyTranslations() {
   window.lunarMediaPlayer?.localize();
   globalThis.lunarFonts?.localize();
   globalThis.lunarGoogleApps?.localize();
-  globalThis.lunarPrivacy?.localize();
   syncLegalDocumentLinks();
   syncConnectorGuideLinks();
 }

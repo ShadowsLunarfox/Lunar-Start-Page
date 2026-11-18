@@ -201,6 +201,9 @@ async function refreshSharedState() {
   const previousBackground = sharedSyncClone(state.background);
   publishSharedState();
   const next = sharedSyncProject(state);
+  if (previous.fields["settings.searchSuggestionsEnabled"] && !state.settings.searchSuggestionsEnabled) {
+    cancelPendingSearchSuggestions();
+  }
   const revision = localStorage.getItem(SHARED_SYNC_PREFIX + "assetRevision") || "";
   if (!sharedSyncNeedsRender && sharedSyncEqual(previous, next) && sharedSyncEqual(oldTheme, sharedSyncTheme(state.settings)) && revision === sharedBackgroundRevision) return;
   sharedSyncNeedsRender = false;

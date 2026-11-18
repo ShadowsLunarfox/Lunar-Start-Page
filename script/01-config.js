@@ -25,25 +25,18 @@ const MAX_SEARCH_HISTORY = 12;
 const SEARCH_SUGGESTION_DEBOUNCE_MS = 180;
 const GOOGLE_IMAGE_SEARCH_UPLOAD_URL = "https://www.google.com/searchbyimage/upload";
 const DEFAULT_SEARCH_SUGGESTIONS = [
-  "youtube music",
-  "gmail inbox",
-  "github trending",
-  "weather today",
-  "google translate",
-  "chatgpt",
-  "news today",
-  "calendar",
-  "maps",
-  "amazon",
-  "netflix",
-  "spotify",
-  "reddit",
-  "stackoverflow",
-  "bing image creator",
-  "vrchat",
-  "vrc world",
-  "vrc avatar",
-  "vrc group"
+  "中文兽维基",
+  "兽展日历",
+  "WildDream 创作站",
+  "兽设参考",
+  "兽装制作教程",
+  "furry 绘画教程",
+  "中文兽圈",
+  "你好兽聚",
+  "Infurnity 兽无限",
+  "Furrymosa",
+  "VRChat 兽人世界",
+  "furry avatar"
 ];
 
 const SEARCH_ENGINES = {
@@ -80,32 +73,44 @@ const SEARCH_ENGINE_CATEGORY_ORDER = ["mainstream", "niche", "caution"];
 
 const PRESETS = {
   wallpaper_1: {
-    path: "themes/wallpaper/blue-marble.jpg",
-    label: "NASA · Blue Marble",
+    path: "themes/wallpaper/furry-paw-day.webp",
+    label: "Pawprint Sky",
     mediaType: "image"
   },
   wallpaper_2: {
-    path: "themes/wallpaper/lunar-earthset.jpg",
-    label: "NASA · Lunar Earthset",
+    path: "themes/wallpaper/furry-paw-moon.webp",
+    label: "Moonlit Paws",
     mediaType: "image"
   },
   wallpaper_3: {
-    path: "themes/wallpaper/cosmic-cliffs.jpg",
-    label: "NASA · Cosmic Cliffs",
+    path: "themes/wallpaper/furry-paw-studio.webp",
+    label: "Mint Art Studio",
+    mediaType: "image"
+  },
+  rainy_library: {
+    path: "themes/wallpaper/furry-rainy-library.webp",
+    label: "Rainy Woodland Library",
+    mediaType: "image"
+  },
+  lakeside_tea: {
+    path: "themes/wallpaper/furry-lakeside-tea.webp",
+    label: "Lakeside Tea",
     mediaType: "image"
   },
   komainu_desktop: {
-    path: "themes/wallpaper/Mp4/earthset-loop.mp4",
-    label: "NASA · Earthset Loop",
+    path: "themes/wallpaper/Mp4/furry-paw-breeze.mp4",
+    label: "Pawprint Breeze · Animated",
     mediaType: "video"
   }
 };
 
 const PRESET_LABELS = {
-  wallpaper_1: "NASA · Blue Marble",
-  wallpaper_2: "NASA · Lunar Earthset",
-  wallpaper_3: "NASA · Cosmic Cliffs",
-  komainu_desktop: "NASA · Earthset Loop"
+  wallpaper_1: "Pawprint Sky",
+  wallpaper_2: "Moonlit Paws",
+  wallpaper_3: "Mint Art Studio",
+  rainy_library: "Rainy Woodland Library",
+  lakeside_tea: "Lakeside Tea",
+  komainu_desktop: "Pawprint Breeze · Animated"
 };
 
 const THEME_TEXT_DEFAULTS = {
@@ -154,7 +159,7 @@ const DEFAULT_SETTINGS = {
   fontScale: 100,
   radius: 24,
   panelBlur: 22,
-  searchSuggestionsEnabled: false,
+  searchSuggestionsEnabled: true,
   searchSuggestionsAllEnginesEnabled: false,
   searchSuggestionEngineKeys: ["google", "bing", "baidu"],
   searchUiVisible: true,

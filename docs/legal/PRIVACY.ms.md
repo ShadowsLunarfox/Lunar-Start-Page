@@ -49,7 +49,7 @@ Perkhidmatan rangkaian terbina dalam menggunakan HTTPS; pautan/sumber sendiri be
 
 ## 7. Pilihan dan hak
 
-Halaman utama dibuka tanpa skrin persetujuan terma pada penggunaan pertama. Tetapan → Carian → Penggunaan data dan ciri pilihan menyediakan pilihan berasingan untuk cadangan carian dalam talian serta ikon, fon dan imej luaran; ciri ini dimatikan sehingga diaktifkan secara berasingan. Carian suara dan imej memaparkan notis penggunaan data masing-masing sebelum penggunaan pertama. Media Windows mengekalkan pendedahan dan kebenaran pelayar yang berasingan. Menolak atau menarik balik pilihan tidak menyekat halaman utama. Pilihan disimpan dalam profil pelayar ini sahaja dan tidak dimasukkan dalam sandaran halaman utama.
+Halaman utama dibuka tanpa skrin persetujuan terma pada penggunaan pertama. Cadangan carian dalam talian dihidupkan secara lalai dan boleh dimatikan di Tetapan → Carian. Halaman utama boleh memuatkan ikon, fon dan imej dalam talian seperti diterangkan dalam bahagian 3. Carian suara bermula apabila anda menekan butang mikrofon dan tertakluk pada kebenaran mikrofon pelayar. Carian imej menghantar imej yang anda pilih atau lepaskan kepada Google. Widget media Windows mempunyai penerangan tersendiri dan kebenaran pelayar pilihan.
 
 Anda boleh mengedit/memadam item, mengurus sejarah carian, mematikan cadangan, menarik balik kebenaran dan mengeksport data. Pembersihan cache prestasi bukan pemadaman semua data. Untuk pembuangan lengkap, nyahpasang sambungan, kosongkan data setempat melalui pelayar dan padam sandaran sendiri.
 

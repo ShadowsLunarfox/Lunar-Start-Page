@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Lunar Start Page",
   "short_name": "Lunar Start",
-  "description": "A customizable new tab page with draggable panels, themed clocks, search, bookmarks, wallpapers, and visual style presets.",
+  "description": "A furry new tab with cute pawprint wallpapers, animated backgrounds, Chinese community shortcuts, search, clocks and bookmarks.",
   "version": "1.2.0",
   "chrome_url_overrides": {
     "newtab": "newtab.html"

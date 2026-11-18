@@ -143,15 +143,8 @@ function clearSearchSuggestionAbortController(controller) {
   }
 }
 
-async function handleSearchSuggestionsSettingChange() {
-  const enabled = searchSuggestionsSettingEl.value === "on";
-  if (enabled && !await globalThis.lunarPrivacy?.request("suggestions")) {
-    searchSuggestionsSettingEl.value = "off";
-    renderSettingsPanelIfReady();
-    return;
-  }
-  if (!enabled) globalThis.lunarPrivacy?.revoke("suggestions");
-  updateSetting("searchSuggestionsEnabled", enabled);
+function handleSearchSuggestionsSettingChange() {
+  updateSetting("searchSuggestionsEnabled", searchSuggestionsSettingEl.value === "on");
 }
 
 // Keep the main search bar and settings panel in sync.
@@ -347,7 +340,7 @@ function isDragLeavingWindow(event) {
   );
 }
 
-async function submitGoogleImageSearchFile(file, sourceInput = null) {
+function submitGoogleImageSearchFile(file, sourceInput = null) {
   if (!file) {
     return;
   }
@@ -357,7 +350,6 @@ async function submitGoogleImageSearchFile(file, sourceInput = null) {
     return;
   }
 
-  if (!await globalThis.lunarPrivacy?.request("image")) return;
   const imageInput = createImageSearchFileInput(file, sourceInput);
   if (!imageInput) {
     showInlineNotice(t("alerts.image_search_upload_unavailable"), "error");
@@ -412,7 +404,7 @@ function createHiddenFormField(name, value) {
   return input;
 }
 
-async function handleVoiceSearchToggle() {
+function handleVoiceSearchToggle() {
   triggerVoiceSearchPressFeedback();
 
   if (isVoiceSearchListening) {
@@ -428,7 +420,6 @@ async function handleVoiceSearchToggle() {
     return;
   }
 
-  if (!await globalThis.lunarPrivacy?.request("voice")) return;
   recognition.lang = getVoiceSearchLocale();
   voiceSearchAbortRequested = false;
   searchInputEl.focus();
@@ -509,7 +500,7 @@ function ensureVoiceSearchRecognition() {
 }
 
 function handleVoiceSearchResult(event) {
-  if (!globalThis.lunarPrivacy?.has("voice")) return;
+  if (voiceSearchAbortRequested) return;
   let latestTranscript = "";
   let finalTranscript = "";
 
@@ -673,7 +664,7 @@ function renderSuggestionState(items) {
 }
 
 async function fetchRemoteSearchSuggestions(query, signal) {
-  if (!globalThis.lunarPrivacy?.has("suggestions")) return [];
+  if (!state.settings.searchSuggestionsEnabled) return [];
   const normalizedQuery = query.trim();
   if (!normalizedQuery) return [];
 

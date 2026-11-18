@@ -3,7 +3,7 @@
 
   <h1>🌙 Lunar Start Page</h1>
 
-  <p><strong>A customizable new tab page for a more personal start to every browsing session.</strong></p>
+  <p><strong>A cozy furry start page with pawprint wallpapers and Chinese community shortcuts.</strong></p>
 
   <p>
     <img src="https://img.shields.io/badge/Manifest-V3-7c3aed?style=for-the-badge" alt="Manifest V3" />
@@ -20,7 +20,13 @@
 
 ---
 
-Both interfaces open directly without a first-run terms agreement. **Settings → Search → Data use & optional features** explains local storage and each online feature. Online suggestions and external icons, fonts and wallpapers stay off until individually enabled; old settings or backups do not grant consent. Voice and image search explain their data use before first use. Choices stay in the current browser profile, are shared between modern and legacy mode, and can be revoked in the same settings section. Terms and privacy-policy links remain in settings. Windows media retains its separate disclosure and optional permission.
+Both interfaces open directly. Online search suggestions are on by default and can be turned off under **Settings → Search**. The homepage can load online icons, fonts and wallpapers. Voice search starts when you click the microphone, subject to the browser's microphone permission. Image search sends your selected or dropped image to Google. The privacy policy and terms are linked in settings. The Windows media widget has its own disclosure and optional browser permission.
+
+New profiles start with **Pawprint Sky**, a fresh pastel furry illustration. Wallpaper settings also include **Moonlit Paws**, **Mint Art Studio**, the warm woodland scenes **Rainy Woodland Library** and **Lakeside Tea**, and the silent **Pawprint Breeze** animation. These AI-generated illustrations and the shortcut icons are bundled locally; opening a new tab does not fetch them from another site. [Asset provenance and prompts](themes/wallpaper/CREDITS.md) are included.
+
+New profiles start with five shortcuts. [FurryCons Calendar](https://furrycons.com/calendar/), [Instagram](https://www.instagram.com/), [Facebook](https://www.facebook.com/), [YouTube](https://www.youtube.com/), and [Twitter](https://x.com/).
+
+Updates preserve saved bookmarks, custom uploads and theme choices.
 
 ## ✨ Features
 
@@ -64,7 +70,7 @@ Lunar Start Page is a Manifest V3 extension. You can load it in Chrome or Micros
 
 ## 🧭 Getting started
 
-- Searches send the submitted query to the selected search engine and keep search history locally. The search bar shows this notice. Canceling an optional feature notice keeps that feature off while leaving the homepage usable; no extension-management permission is requested.
+- Searches send the submitted query to the selected search engine and keep search history locally.
 - Open a new tab and use the search bar or your shortcut cards.
 - The Windows media widget is optional and off by default. Click the music-note corner button, read the data/use disclosure, and select **Agree and enable** to request its optional permission. Install the separate Windows connector only if you choose to use it; the extension never installs it automatically. See [connector instructions](native/windows-media-source/README.md). Use the widget's information button to disable it and revoke permission. Canceling or denying permission leaves the homepage available. The widget shares the refresh fade and automatically follows the exact Windows current media session, including a change between videos in the same browser; supported controls depend on that source. No playback starts automatically.
 - The shared start area brings the clock, search engine, voice search, and image search together.
@@ -97,7 +103,7 @@ Run `node scripts/check-browser-ui.mjs --debug-only` for debug-menu checks in an
 
 The browser checks also measure text contrast in both display modes across the homepage, settings, and dialogs, and verify repeated theme switching. Use `node scripts/check-browser-ui.mjs --preview theme=light language=zh-CN` to capture a light-mode debug preview. Saved custom colors are retained; legacy default colors migrate together so light-mode text and panels stay readable.
 
-The modern interface uses a unified layout. The original interface, including its Cartoon, Windows 98, Windows XP, and Terminal skins, is bundled independently under `legacy/`. Both versions use the current wallpaper and icon files from `themes/wallpaper/` and `resource/icons/`. The built-in set contains three NASA space images and a silent Earthset video loop; [wallpaper sources and processing](themes/wallpaper/CREDITS.md) are documented separately. Image/video selection and custom uploads remain available, and existing preset choices use the replacement files. The lightweight new-tab entry reads the saved version before loading a page, so legacy mode does not load modern interface HTML, scripts, styles, or translations. No files from the Downloads folder are required after installation.
+The modern interface uses a unified layout. The original interface, including its Cartoon, Windows 98, Windows XP, and Terminal skins, is bundled independently under `legacy/`. Both versions use the current wallpaper and icon files from `themes/wallpaper/` and `resource/icons/`. The built-in set contains five furry illustrations and a silent pawprint animation; [wallpaper sources and processing](themes/wallpaper/CREDITS.md) are documented separately. Image/video selection and custom uploads remain available, and existing preset choices use the replacement files. The lightweight new-tab entry reads the saved version before loading a page, so legacy mode does not load modern interface HTML, scripts, styles, or translations. No files from the Downloads folder are required after installation.
 
 User data and non-theme preferences synchronize live. Existing collections merge by address on first use, with the first opened interface supplying the initial preferences. Changes are stored per preference and per bookmark field, so concurrent edits to different items or fields cannot overwrite an entire older snapshot. Deletion markers prevent stale tabs and pending deliveries from restoring deleted bookmarks. Reordering, pinning, searching, language, wallpaper, clock, font scale, transparency, spacing, and desired module layout synchronize; card heights adapt to each interface's size range. Actual viewport-constrained panel positions stay local to avoid layout feedback between different designs or window sizes.
 
@@ -111,11 +117,11 @@ The Google apps launcher is implemented inside Lunar. Both interfaces show the s
 
 Run `node scripts/verify-quick-save.mjs` for delivery to both versions, unopened-version retention, rapid saves, stale-index recovery, URL deduplication, and retry after local saving fails. The version browser checks also exercise shared right-click delivery through both interfaces' import and rendering code.
 
-Run `node scripts/verify-media-broker.mjs` for client validation and native connection routing. Run `node scripts/check-browser-ui.mjs --player-only` for isolated player checks covering the arrival fade, controls, seeking, automatic Windows source changes, stale actions and seeks, private preferences, connection recovery, light/dark colors, narrow windows, and legacy isolation. These browser checks use simulated media and do not control real playback.
+Run `node scripts/check-browser-ui.mjs --player-only` for isolated player checks covering the arrival fade, controls, seeking, automatic Windows source changes, stale actions and seeks, private preferences, connection recovery, light/dark colors, narrow windows, and legacy isolation. The browser checks use simulated media.
 
 The player checks also verify that existing visibility preferences do not imply consent, and cover canceled/denied permission requests, explicit opt-in, permission removal and display cleanup. The media player has a background-update checkbox in its setup dialog. Enabling the new disclosure is required before background access; earlier visible-page consent does not enable it automatically. With background updates selected, hiding widgets or closing every homepage only disconnects those pages: one shared worker keeps reading and caches the latest state in `chrome.storage.session`. Disabling or revoking a feature stops its background work and clears its cache. No history, disk-persisted readings or backups are created; browser shutdown clears the session cache. If background updates are off, closing the last visible widget stops reading. Browser restart, sleep or a worker/connector failure may still require recovery before fresh readings are available.
 
-Run `node scripts/verify-background-widgets.mjs` to check media sampling, warm-cache responses, closed-page operation, foreground-only opt-out, startup recovery, session-only data and permission revocation. Context-menu saving uses `activeTab` rather than broad `tabs` access.
+Run `node scripts/verify-background-widgets.mjs` to check native connection routing, media sampling, warm-cache responses, closed-page operation, foreground-only opt-out, startup recovery, session-only data and permission revocation. Context-menu saving uses `activeTab` rather than broad `tabs` access.
 
 Open [LunarConnectorManager.exe](native/windows-media/LunarConnectorManager.exe) in `native/windows-media/` to manage the connector. This folder contains only the standalone EXE for everyday use. Maintenance source, scripts and fixtures live separately in `native/windows-media-source/`; packaging writes release artifacts to `dist/`.
 

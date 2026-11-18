@@ -49,7 +49,7 @@ Built-in network services use HTTPS; user-supplied links/resources depend on the
 
 ## 7. Choices and rights
 
-The homepage opens without a first-run terms gate. Settings → Search → Data use & optional features provides separate choices for online suggestions and external icons, fonts and images; these stay off until explicitly enabled after their disclosure. Voice and image search show their own data-use notice before first use. Windows media retains its separate disclosure and browser permission. Declining or revoking an optional choice leaves the homepage usable. Feature choices are stored only in the current browser profile and are not included in homepage backups.
+The homepage opens without a first-run terms gate. Online search suggestions are on by default and can be turned off in Settings → Search. The homepage can load online icons, fonts and images as described in section 3. Voice search starts when you click the microphone and is subject to the browser's microphone permission. Image search sends the image you choose or drop to Google. The Windows media widget has its own disclosure and optional browser permission.
 
 You can edit/delete homepage items, manage local search history, turn suggestions off, revoke optional permissions and export data. Performance-cache cleanup does not erase all user data. For complete removal, uninstall the extension, clear its local data using browser facilities, and remove your own exported backups.
 

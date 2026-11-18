@@ -17,15 +17,17 @@ const DEFAULT_STATE = {
   searchHistory: [],
   settings: structuredClone(DEFAULT_SETTINGS),
   links: [
-    createDefaultLink("YouTube", "https://www.youtube.com", true),
-    createDefaultLink("x", "https://x.com", false),
-    createDefaultLink("facebook", "https://facebook.com", false)
-    
+    createDefaultLink("FurryCons Calendar", "https://furrycons.com/calendar/", false),
+    createDefaultLink("Instagram", "https://www.instagram.com/", false),
+    createDefaultLink("Facebook", "https://www.facebook.com/", false),
+    createDefaultLink("YouTube", "https://www.youtube.com/", false),
+    createDefaultLink("Twitter", "https://x.com/", false)
   ],
   background: {
-    type: "theme",
-    value: "",
-    name: ""
+    type: "preset",
+    value: "wallpaper_1",
+    name: "",
+    selectedByUser: true
   }
 };
 
@@ -184,7 +186,6 @@ void initialize();
 
 async function initialize() {
   initializeSharedState();
-  globalThis.lunarPrivacy?.initialize();
   document.documentElement.lang = normalizeLanguage(state.language || detectPreferredLanguage());
   renderPriorityBackgroundShell();
   const backgroundReady = initializeBackgroundStorage().then(
@@ -1576,8 +1577,7 @@ function getChromiumMajorVersion() {
   return match ? Number(match[1]) : 0;
 }
 
-async function handleMultiSuggestionsToggleClick() {
-  if (!await globalThis.lunarPrivacy?.request("suggestions")) return;
+function handleMultiSuggestionsToggleClick() {
   state.settings = sanitizeSettings({
     ...state.settings,
     searchSuggestionsEnabled: true,

@@ -935,7 +935,6 @@ function isBackgroundVideoActive(source = "") {
 }
 
 function playBackgroundVideo(source, options = {}) {
-  if (!canLoadResource(source)) { stopBackgroundVideo(); return; }
   if (!backgroundVideoEl || !source) return;
 
   const shouldNudge = Boolean(options.nudge);
@@ -1232,7 +1231,6 @@ function renderThemeBackground() {
 }
 
 function setBackgroundLayerImage(source) {
-  if (!canLoadResource(source)) { hideBackgroundLayerImage(); return; }
   if (!backgroundLayerEl || !source || activeBackgroundLayerSource === source) return;
   activeBackgroundLayerSource = source;
   backgroundLayerEl.style.backgroundImage = `url("${escapeCssUrl(source)}")`;
@@ -1335,11 +1333,10 @@ function applyThemeStyle() {
 
 function loadThemeFont(styleKey) {
   const href = THEME_FONT_FILES[styleKey];
-  if (!href || !canLoadResource(href) || loadedThemeFontKey === styleKey) return;
+  if (!href || loadedThemeFontKey === styleKey) return;
 
   loadedThemeFontKey = styleKey;
   runWhenIdle(() => {
-    if (!canLoadResource(href)) return;
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = href;

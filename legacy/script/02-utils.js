@@ -1,7 +1,6 @@
 // Small utility helpers.
 function ownsInterfaceStorageKey(key) {
   if (typeof key !== "string") return false;
-  if (key.startsWith("lunarFeatureConsent:v1:")) return true;
   if (STORAGE_KEY === "customHomeStateLegacy") return key === STORAGE_KEY || key.startsWith("legacy:") || key.startsWith(LANGUAGE_CACHE_PREFIX);
   return key === STORAGE_KEY || key === BROWSER_PREFLIGHT_CACHE_KEY || key === FIREFOX_COMPAT_NOTICE_ACK_KEY
     || key.startsWith(BROWSER_COMPAT_NOTICE_ACK_PREFIX)
@@ -60,13 +59,25 @@ function stripProtocol(url) {
   return url.replace(/^https?:\/\//i, "").replace(/\/$/, "");
 }
 
-function canLoadResource(source) {
-  return globalThis.lunarPrivacy?.allowsUrl(source) ?? !/^(?:https?:)?\/\//i.test(source);
-}
-
 function faviconForUrl(url) {
   try {
     const target = new URL(normalizeUrl(url));
+    const bundledIcons = {
+      "zh.wikifur.com": "wiki",
+      "www.furrycons.cn": "calendar",
+      "www.wilddream.net": "art",
+      "hi-furry.cn": "paw",
+      "www.infurnity.com": "star",
+      "furrymosa.gjs.tw": "book",
+      "furrycons.com": "calendar",
+      "www.instagram.com": "camera",
+      "www.facebook.com": "people",
+      "www.youtube.com": "video",
+      "x.com": "chat"
+    };
+    const icon = bundledIcons[target.hostname.toLowerCase()];
+    if (icon) return "../resource/icons/furry/" + icon + ".svg";
+
     return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(target.hostname)}&sz=64`;
   } catch {
     return "";

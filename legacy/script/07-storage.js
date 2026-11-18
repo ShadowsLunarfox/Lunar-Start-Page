@@ -308,8 +308,7 @@ function sanitizeSettings(value) {
     dropdownColor: normalizeHexColor(value?.dropdownColor, DROPDOWN_COLOR_DEFAULTS[theme]),
     sliderTrackColor: normalizeHexColor(value?.sliderTrackColor, SLIDER_TRACK_COLOR_DEFAULTS[theme]),
     sliderFillColor: normalizeHexColor(value?.sliderFillColor, DEFAULT_SETTINGS.sliderFillColor),
-    searchSuggestionsEnabled: (typeof globalThis.lunarPrivacy === "undefined" || globalThis.lunarPrivacy.has("suggestions"))
-      && (typeof value?.searchSuggestionsEnabled === "boolean" ? value.searchSuggestionsEnabled : DEFAULT_SETTINGS.searchSuggestionsEnabled),
+    searchSuggestionsEnabled: typeof value?.searchSuggestionsEnabled === "boolean" ? value.searchSuggestionsEnabled : DEFAULT_SETTINGS.searchSuggestionsEnabled,
     searchSuggestionsAllEnginesEnabled: typeof value?.searchSuggestionsAllEnginesEnabled === "boolean"
       ? value.searchSuggestionsAllEnginesEnabled
       : DEFAULT_SETTINGS.searchSuggestionsAllEnginesEnabled,

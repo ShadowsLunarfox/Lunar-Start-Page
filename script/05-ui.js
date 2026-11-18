@@ -938,7 +938,6 @@ function isBackgroundVideoActive(source = "") {
 }
 
 function playBackgroundVideo(source, options = {}) {
-  if (!canLoadResource(source)) { stopBackgroundVideo(); return; }
   if (!backgroundVideoEl || !source) return;
 
   const shouldNudge = Boolean(options.nudge);
@@ -1235,7 +1234,6 @@ function renderThemeBackground() {
 }
 
 function setBackgroundLayerImage(source) {
-  if (!canLoadResource(source)) { hideBackgroundLayerImage(); return; }
   if (!backgroundLayerEl || !source || activeBackgroundLayerSource === source) return;
   activeBackgroundLayerSource = source;
   backgroundLayerEl.style.backgroundImage = `url("${escapeCssUrl(source)}")`;
