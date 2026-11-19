@@ -3,7 +3,7 @@
   "name": "Lunar Start Page",
   "short_name": "Lunar Start",
   "description": "A furry new tab with cute pawprint wallpapers, animated backgrounds, Chinese community shortcuts, search, clocks and bookmarks.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
@@ -36,8 +36,7 @@
   "permissions": [
     "storage",
     "alarms",
-    "contextMenus",
-    "activeTab"
+    "contextMenus"
   ],
   "optional_permissions": [
     "nativeMessaging"

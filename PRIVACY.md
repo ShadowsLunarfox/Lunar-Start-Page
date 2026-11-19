@@ -12,7 +12,7 @@ Contact [project support](https://github.com/ShadowsLunarfox/Lunar-Start-Page/is
 
 ## 2. Information on your device
 
-The extension stores saved/imported shortcut names and URLs, icon information, ordering and pins, homepage search history, language, interface choice, appearance, layout, feature preferences and custom wallpapers in browser-local storage or IndexedDB. Right-click saving reads the title and URL of the page you choose to save; it does not scan your complete browsing history or continuously monitor all tabs.
+The extension stores saved/imported shortcut names and URLs, icon information, ordering and pins, homepage search history, language, interface choice, appearance, layout, feature preferences and custom wallpapers in browser-local storage or IndexedDB. Right-click saving reads the URL of the page you choose to save and its title when the browser provides it; it does not scan your complete browsing history or continuously monitor all tabs.
 
 Modern/legacy synchronization takes place within the same browser profile, not through a developer cloud. The extension does not upload these records through Chrome Storage Sync. Diagnostics are generated locally; their contents leave that local interface only if you choose to copy, export or submit them.
 

@@ -27,8 +27,7 @@ Do not describe this as Google/Microsoft-endorsed, universally controlling every
 | Permission | Current use |
 | --- | --- |
 | `storage` | Local settings, wallpaper fallback data and durable right-click save queues. No Chrome Storage Sync. |
-| `contextMenus` | Explicit “Save This Page to Lunar Start” context-menu action. |
-| `activeTab` | Temporary title/address access only when that context menu is invoked; replaces broad `tabs` access. No browsing-history scan or background tab monitoring. |
+| `contextMenus` | Adds “Save This Page to Lunar Start” and provides the selected page URL when the user clicks it. The site hostname is used as the shortcut name if the browser omits the page title. |
 | optional `nativeMessaging` | The optional Windows media widget uses the local Windows connector after its disclosure and explicit opt-in. Denial leaves core homepage functions working; revocation stops media access and clears temporary media data. |
 | `alarms` | Recover explicitly enabled background sampling after a worker restart. An alarm exists only for a feature with background updates selected; it is not used for unrelated activity. |
 | exact suggestion-provider host origins | HTTPS query suggestions from the implemented DuckDuckGo, Google, Bing, Yahoo, Baidu, Sogou and 360 endpoints. No unused suggestion host permission. |
@@ -59,6 +58,6 @@ Before submission, also confirm rights/licenses for all bundled wallpapers, vide
 
 - [Native messaging](https://developer.chrome.com/docs/extensions/develop/concepts/native-messaging)
 - [Optional permissions and user gestures](https://developer.chrome.com/docs/extensions/reference/api/permissions)
-- [activeTab and context menu invocation](https://developer.chrome.com/docs/extensions/develop/concepts/activeTab)
+- [Context menu click data](https://developer.chrome.com/docs/extensions/reference/api/contextMenus#type-OnClickData)
 - [User data FAQ, including local processing](https://developer.chrome.com/docs/webstore/program-policies/user-data-faq)
 - [Program policies](https://developer.chrome.com/docs/webstore/program-policies/policies)

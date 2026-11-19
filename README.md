@@ -8,7 +8,7 @@
   <p>
     <img src="https://img.shields.io/badge/Manifest-V3-7c3aed?style=for-the-badge" alt="Manifest V3" />
     <img src="https://img.shields.io/badge/License-GPL--3.0-22c55e?style=for-the-badge" alt="GPL-3.0 license" />
-    <img src="https://img.shields.io/badge/Version-1.2.0-ec4899?style=for-the-badge" alt="Version 1.2.0" />
+    <img src="https://img.shields.io/badge/Version-1.2.1-ec4899?style=for-the-badge" alt="Version 1.2.1" />
   </p>
 
   <p>
@@ -141,7 +141,7 @@ Run `node scripts/check-browser-ui.mjs --player-only` for isolated player checks
 
 The player checks also verify that existing visibility preferences do not imply consent, and cover canceled/denied permission requests, explicit opt-in, permission removal and display cleanup. The media player has a background-update checkbox in its setup dialog. Enabling the new disclosure is required before background access; earlier visible-page consent does not enable it automatically. With background updates selected, hiding widgets or closing every homepage only disconnects those pages: one shared worker keeps reading and caches the latest state in `chrome.storage.session`. Disabling or revoking a feature stops its background work and clears its cache. No history, disk-persisted readings or backups are created; browser shutdown clears the session cache. If background updates are off, closing the last visible widget stops reading. Browser restart, sleep or a worker/connector failure may still require recovery before fresh readings are available.
 
-Run `node scripts/verify-background-widgets.mjs` to check native connection routing, media sampling, warm-cache responses, closed-page operation, foreground-only opt-out, startup recovery, session-only data and permission revocation. Context-menu saving uses `activeTab` rather than broad `tabs` access.
+Run `node scripts/verify-background-widgets.mjs` to check native connection routing, media sampling, warm-cache responses, closed-page operation, foreground-only opt-out, startup recovery, session-only data and permission revocation. The save menu uses the clicked page URL and uses the site hostname when the page title is unavailable.
 
 Open [LunarConnectorManager.exe](native/windows-media/LunarConnectorManager.exe) in `native/windows-media/` to manage the connector. This folder contains only the standalone EXE for everyday use. Maintenance source, scripts and fixtures live separately in `native/windows-media-source/`; packaging writes release artifacts to `dist/`.
 

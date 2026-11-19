@@ -12,7 +12,7 @@ Hubungi [sokongan projek](https://github.com/ShadowsLunarfox/Lunar-Start-Page/is
 
 ## 2. Maklumat pada peranti
 
-Nama dan URL pintasan yang disimpan/diimport, maklumat ikon, susunan dan pin, sejarah carian laman utama, bahasa, versi antara muka, rupa, susun atur, pilihan fungsi dan kertas dinding disimpan dalam storan setempat pelayar atau IndexedDB. Simpan melalui klik kanan membaca tajuk dan URL halaman yang anda pilih, bukan mengimbas keseluruhan sejarah pelayaran atau memantau semua tab secara berterusan.
+Nama dan URL pintasan yang disimpan/diimport, maklumat ikon, susunan dan pin, sejarah carian laman utama, bahasa, versi antara muka, rupa, susun atur, pilihan fungsi dan kertas dinding disimpan dalam storan setempat pelayar atau IndexedDB. Simpan melalui klik kanan membaca URL halaman yang anda pilih dan tajuknya jika diberikan oleh pelayar, bukan mengimbas keseluruhan sejarah pelayaran atau memantau semua tab secara berterusan.
 
 Penyegerakan versi baharu/lama berlaku dalam profil pelayar yang sama, bukan melalui awan pembangun. Sambungan tidak memuat naik rekod ini melalui Chrome Storage Sync. Diagnostik dijana setempat; kandungannya keluar daripada antara muka setempat itu hanya jika anda menyalin, mengeksport atau menghantarnya.
 
